@@ -18,23 +18,22 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 
 
 def setup_platform(hass, config, add_entities, discovery_info=None):
-    """Set up the Awesome Light platform."""
+    """Set up the WiZ Light platform."""
     # Assign configuration variables.
     # The configuration check takes care they are present.
     ip = config[CONF_HOST]
-
-    bulb =  wizlight(ip)
+    bulb = wizlight(ip)
 
     # Add devices
-    add_entities(AwesomeLight(bulb))
+    add_entities(WizBulb(bulb) for light in bulb.lights())
 
 
-class AwesomeLight(Light):
+class WizBulb(Light):
     """Representation of WiZ Light bulb"""
 
-    def __init__(self, bulb):
+    def __init__(self, light):
         """Initialize an WiZLight."""
-        self._light = bulb
+        self._light = light
         self._state = None
         self._brightness = None
 
