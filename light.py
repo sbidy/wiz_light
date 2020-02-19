@@ -23,7 +23,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     # The configuration check takes care they are present.
     ip = config[CONF_HOST]
 
-    bulb = wizlight(ip)
+    bulb =  wizlight(ip)
 
     # Add devices
     add_entities(AwesomeLight(bulb))
