@@ -69,7 +69,7 @@ class WizBulb(Light):
             self._light.rgb =  kwargs[ATTR_RGB_COLOR]
         if ATTR_BRIGHTNESS in kwargs:
            self._light.brightness = kwargs[ATTR_BRIGHTNESS]
-        else:
+        if ATTR_COLOR_TEMP in kwargs:
             kelvin = color_utils.color_temperature_mired_to_kelvin(kwargs[ATTR_COLOR_TEMP])
             self._light.colortemp = kelvin
         self._light.turn_on()
