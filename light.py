@@ -66,7 +66,7 @@ class WizBulb(Light):
     def turn_on(self, **kwargs):
         """Instruct the light to turn on."""
         if ATTR_RGB_COLOR in kwargs:
-            self._light.rgb =  kwargs[ATTR_RGB_COLOR]
+            self._light.rgb = kwargs[ATTR_RGB_COLOR][0], kwargs[ATTR_RGB_COLOR][1], kwargs[ATTR_RGB_COLOR][2]
         if ATTR_BRIGHTNESS in kwargs:
            self._light.brightness = kwargs[ATTR_BRIGHTNESS]
         if ATTR_COLOR_TEMP in kwargs:
