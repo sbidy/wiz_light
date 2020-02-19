@@ -62,7 +62,7 @@ class WizBulb(Light):
         This is the only method that should fetch new data for Home Assistant.
         """
         self._state = self._light.status
-        self._brightness = self._light.getBrightness
+        self._brightness = self._light.brightness
 
     def hex_to_percent(self, hex):
         return (hex/255)*100
