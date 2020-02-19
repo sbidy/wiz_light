@@ -25,7 +25,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     bulb = wizlight(ip)
 
     # Add devices
-    add_entities(WizBulb(bulb) for light in bulb.lights())
+    add_entities([WizBulb(bulb)])
 
 
 class WizBulb(Light):
