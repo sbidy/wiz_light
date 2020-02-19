@@ -3,6 +3,6 @@
     "name": "WiZ Light integration",
     "documentation": "https://github.com/sbidy/wiz_light",
     "dependencies": [],
-    "codeowners": [@sbidy],
+    "codeowners": ["@sbidy"],
     "requirements": ["pywizlight==0.2"]
   }
