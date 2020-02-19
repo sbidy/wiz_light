@@ -7,13 +7,13 @@ import homeassistant.helpers.config_validation as cv
 # Import the device class from the component that you want to support
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS, PLATFORM_SCHEMA, Light)
-from homeassistant.const import CONF_IP_ADDRESS
+from homeassistant.const import CONF_HOST
 
 _LOGGER = logging.getLogger(__name__)
 
 # Validation of the user's configuration
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    vol.Required(CONF_IP_ADDRESS): cv.string,
+    vol.Required(CONF_HOST): cv.string,
 })
 
 
@@ -21,7 +21,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     """Set up the Awesome Light platform."""
     # Assign configuration variables.
     # The configuration check takes care they are present.
-    ip = config[CONF_IP_ADDRESS]
+    ip = config[CONF_HOST]
 
     bulb = wizlight(ip)
 
