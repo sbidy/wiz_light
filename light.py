@@ -87,7 +87,7 @@ class WizBulb(Light):
         """
             Return the ip as name of the device if any.
         """
-        return self.name
+        return self._name
 
     @property
     def is_on(self):
