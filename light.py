@@ -108,7 +108,7 @@ class WizBulb(Light):
            self._light.brightness = kwargs[ATTR_BRIGHTNESS]
         if ATTR_COLOR_TEMP in kwargs:
             kelvin = color_utils.color_temperature_mired_to_kelvin(kwargs[ATTR_COLOR_TEMP])
-            _LOGGER.info("{kelvin}K")
+            _LOGGER.info("%sK", kelvin)
             self._light.colortemp = kelvin
         self._light.turn_on()
 
@@ -211,7 +211,7 @@ class WizBulb(Light):
 
     def update_color(self):
         """Update the hs color"""
-        _LOGGER.info("{self._light.rgb} RGB von Lampe")
+        _LOGGER.info("%s RGB von Lampe", self._light.rgb)
         if self._light.rgb is None:
             return
         try:
