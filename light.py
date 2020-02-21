@@ -23,7 +23,7 @@ from homeassistant.components.light import (
 from homeassistant.const import CONF_HOST, CONF_NAME
 
 _LOGGER = logging.getLogger(__name__)
-_VALID_STATES = [STATE_ON, STATE_OFF, "true", "false"]
+_VALID_STATES = [STATE_ON, STATE_OFF, "True", "False", "true", "false"]
 
 # Validation of the user's configuration
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
