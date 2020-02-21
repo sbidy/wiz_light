@@ -19,7 +19,7 @@ import homeassistant.util.color as color_utils
 import homeassistant.helpers.config_validation as cv
 # Import the device class from the component that you want to support
 from homeassistant.components.light import (
-    ATTR_BRIGHTNESS, PLATFORM_SCHEMA, Light, ATTR_RGB_COLOR, SUPPORT_COLOR, SUPPORT_BRIGHTNESS, ATTR_COLOR_TEMP, SUPPORT_COLOR_TEMP,)
+    ATTR_BRIGHTNESS, PLATFORM_SCHEMA, Light, ATTR_RGB_COLOR, SUPPORT_COLOR, SUPPORT_BRIGHTNESS, ATTR_COLOR_TEMP, SUPPORT_COLOR_TEMP, ATTR_HS_COLOR)
 from homeassistant.const import CONF_HOST, CONF_NAME
 
 _LOGGER = logging.getLogger(__name__)
@@ -100,13 +100,15 @@ class WizBulb(Light):
         """
             Instruct the light to turn on.
         """
-        _LOGGER.info(kwargs)
         if ATTR_RGB_COLOR in kwargs:
             self._light.rgb = kwargs[ATTR_RGB_COLOR]
+        if ATTR_HS_COLOR in kwargs:
+            self._hscolor = kwargs[ATTR_HS_COLOR]
         if ATTR_BRIGHTNESS in kwargs:
            self._light.brightness = kwargs[ATTR_BRIGHTNESS]
         if ATTR_COLOR_TEMP in kwargs:
             kelvin = color_utils.color_temperature_mired_to_kelvin(kwargs[ATTR_COLOR_TEMP])
+            _LOGGER.info("{kelvin}K")
             self._light.colortemp = kelvin
         self._light.turn_on()
 
@@ -183,12 +185,7 @@ class WizBulb(Light):
             if self._light.status:
                 self._state = STATE_ON
             else:
-                _LOGGER.error(
-                    "Received invalid light is_on state: %s. Expected: %s",
-                    self._light.status,
-                    ", ".join(_VALID_STATES),
-                )
-                self._state = None
+                self._state = STATE_OFF
         except Exception as ex:
             _LOGGER.error(ex)
             self._state = None
@@ -214,12 +211,14 @@ class WizBulb(Light):
 
     def update_color(self):
         """Update the hs color"""
+        _LOGGER.info("{self._light.rgb} RGB von Lampe")
         if self._light.rgb is None:
             return
         try:
             r, g, b = self._light.rgb
             color = color_utils.color_RGB_to_hs(r,g,b)
             if color is not None:
+                _LOGGER.info("{color} HS Color")
                 self._hscolor = color
             else:
                 _LOGGER.error(
