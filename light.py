@@ -104,7 +104,9 @@ class WizBulb(Light):
         if ATTR_RGB_COLOR in kwargs:
             self._light.rgb = kwargs[ATTR_RGB_COLOR]
         if ATTR_HS_COLOR in kwargs:
-            self._hscolor = kwargs[ATTR_HS_COLOR]
+           rgb = color_utils.color_hs_to_RGB(kwargs[ATTR_HS_COLOR][0], kwargs[ATTR_HS_COLOR][1])
+           _LOGGER.info("RGB: %s", rgb)
+           self._light.rgb = rgb
         if ATTR_BRIGHTNESS in kwargs:
            self._light.brightness = kwargs[ATTR_BRIGHTNESS]
         if ATTR_COLOR_TEMP in kwargs:
@@ -196,7 +198,8 @@ class WizBulb(Light):
         if self._light.colortemp is None:
             return
         try:
-            temperature = color_utils.color_temperature_kelvin_to_mired(int(self._light.colortemp))
+            _LOGGER.info("%s Kelvin von Lampe", self._light.colortemp)
+            temperature = color_utils.color_temperature_kelvin_to_mired(self._light.colortemp)
             if self.min_mireds <= temperature <= self.max_mireds:
                 self._temperature = temperature
             else:
