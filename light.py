@@ -100,6 +100,7 @@ class WizBulb(Light):
         """
             Instruct the light to turn on.
         """
+        _LOGGER.info("Args: %s", kwargs)
         if ATTR_RGB_COLOR in kwargs:
             self._light.rgb = kwargs[ATTR_RGB_COLOR]
         if ATTR_HS_COLOR in kwargs:
@@ -130,14 +131,14 @@ class WizBulb(Light):
         """
             Return the coldest color_temp that this light supports.
         """
-        color_utils.color_temperature_kelvin_to_mired(2500)
+        color_utils.color_temperature_kelvin_to_mired(6500)
 
     @property
     def max_mireds(self):
         """
             Return the warmest color_temp that this light supports.
         """
-        return color_utils.color_temperature_kelvin_to_mired(6500)
+        return color_utils.color_temperature_kelvin_to_mired(2500)
 
     @property
     def supported_features(self) -> int:
@@ -218,7 +219,7 @@ class WizBulb(Light):
             r, g, b = self._light.rgb
             color = color_utils.color_RGB_to_hs(r,g,b)
             if color is not None:
-                _LOGGER.info("{color} HS Color")
+                _LOGGER.info("%s HS Color", color)
                 self._hscolor = color
             else:
                 _LOGGER.error(
