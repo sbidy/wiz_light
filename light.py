@@ -180,13 +180,12 @@ class WizBulb(Light):
         if self._light.status is None:
             return
         try:
-            state = self._light.status
-            if state in _VALID_STATES:
-                self._state = state in ("True", STATE_ON)
+            if self._light.status:
+                self._state = STATE_ON
             else:
                 _LOGGER.error(
                     "Received invalid light is_on state: %s. Expected: %s",
-                    state,
+                    self._light.status,
                     ", ".join(_VALID_STATES),
                 )
                 self._state = None
