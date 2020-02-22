@@ -8,6 +8,8 @@
 
 
 """Platform for light integration."""
+''' Stephan Traub @sbidy '''
+
 import logging
 import voluptuous as vol
 from pywizlight import wizlight
@@ -100,13 +102,10 @@ class WizBulb(Light):
         """
             Instruct the light to turn on.
         """
-        _LOGGER.info("Args: %s", kwargs)
         if ATTR_RGB_COLOR in kwargs:
             self._light.rgb = kwargs[ATTR_RGB_COLOR]
         if ATTR_HS_COLOR in kwargs:
-           rgb = color_utils.color_hs_to_RGB(kwargs[ATTR_HS_COLOR][0], kwargs[ATTR_HS_COLOR][1])
-           _LOGGER.info("RGB: %s", rgb)
-           self._light.rgb = rgb
+           self._light.rgb = color_utils.color_hs_to_RGB(kwargs[ATTR_HS_COLOR][0], kwargs[ATTR_HS_COLOR][1])
         if ATTR_BRIGHTNESS in kwargs:
            self._light.brightness = kwargs[ATTR_BRIGHTNESS]
         if ATTR_COLOR_TEMP in kwargs:
@@ -159,12 +158,15 @@ class WizBulb(Light):
         self.update_brightness()
         self.update_temperature()
         self.update_color()
+        # deprecated - should be deleted
         self._rgb_color = self._light.rgb
 
 # ---- CALLBACKS -----
 
     def update_brightness(self):
-        """Update the brightness."""
+        """
+            Update the brightness.
+        """
         if self._light.brightness is None:
             return
         try:
@@ -181,7 +183,9 @@ class WizBulb(Light):
             self._state = None
 
     def update_state(self):
-        """Update the state """
+        """
+            Update the state
+        """
         if self._light.status is None:
             return
         try:
@@ -194,7 +198,9 @@ class WizBulb(Light):
             self._state = None
 
     def update_temperature(self):
-        """Update the temperature"""
+        """
+            Update the temperature
+        """
         if self._light.colortemp is None:
             return
         try:
@@ -213,8 +219,9 @@ class WizBulb(Light):
             self._temperature = None
 
     def update_color(self):
-        """Update the hs color"""
-        _LOGGER.info("%s RGB von Lampe", self._light.rgb)
+        """
+            Update the hs color
+        """
         if self._light.rgb is None:
             return
         try:
