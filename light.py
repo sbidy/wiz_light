@@ -2,8 +2,6 @@
     ToDO:
         - Change ATTR_BRIGHTNESS to ATTR_BRIGHTNESS_PCT ??
         - ATTR_EFFECT_LIST - List of possible effects
-        - @property def white_value(self)
-
 '''
 
 
@@ -32,7 +30,9 @@ from homeassistant.components.light import (
     SUPPORT_COLOR_TEMP,
     ATTR_HS_COLOR,
     SUPPORT_EFFECT,
-    ATTR_EFFECT
+    ATTR_EFFECT,
+    ATTR_TRANSITION,
+    SUPPORT_TRANSITION
     )
 from homeassistant.const import CONF_HOST, CONF_NAME
 
@@ -45,7 +45,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_NAME): cv.string,
 })
 
-SUPPORT_FEATURES = (SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT)
+SUPPORT_FEATURES = (SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT | SUPPORT_TRANSITION)
 
 def setup_platform(hass, config, add_entities, discovery_info=None):
     """
@@ -79,6 +79,7 @@ class WizBulb(Light):
         self._available = None
         self._effect = None
         self._scenes = []
+        self._speed = None
 
     @property
     def brightness(self):
@@ -86,6 +87,13 @@ class WizBulb(Light):
             Return the brightness of the light.
         """
         return self._brightness
+
+    @property
+    def transition(self):
+        """
+            Return the brightness of the light.
+        """
+        return self._speed
 
     @property
     def rgb_color(self):
@@ -127,8 +135,9 @@ class WizBulb(Light):
             kelvin = color_utils.color_temperature_mired_to_kelvin(kwargs[ATTR_COLOR_TEMP])
             self._light.colortemp = kelvin
         if ATTR_EFFECT in kwargs:
-            _LOGGER.info("Effekt %s", kwargs[ATTR_EFFECT])
             self._light.scene = self.scene_helper(kwargs[ATTR_EFFECT])
+        if ATTR_TRANSITION in kwargs:
+            self._speed = kwargs[ATTR_TRANSITION]
         self._light.turn_on()
 
     async def async_turn_off(self, **kwargs):
@@ -191,6 +200,7 @@ class WizBulb(Light):
         self.update_temperature()
         self.update_color()
         self.update_effect()
+        self.update_transition()
         self.update_scene_list()
 
         # deprecated - should be deleted
@@ -238,15 +248,7 @@ class WizBulb(Light):
             return
         try:
             temperature = color_utils.color_temperature_kelvin_to_mired(self._light.colortemp)
-            if self.min_mireds <= temperature <= self.max_mireds:
-                self._temperature = temperature
-            else:
-                _LOGGER.error(
-                    "Received invalid color temperature : %s. Expected: 0-%s",
-                    temperature,
-                    self.max_mireds,
-                )
-                self._temperature = None
+            self._temperature = temperature
         except Exception:
             _LOGGER.error("Cannot evaluate temperature", exc_info=True)
             self._temperature = None
@@ -288,14 +290,22 @@ class WizBulb(Light):
             update the bulb availability
         '''
         self._effect = self._light.scene
+
     @callback
+    def update_transition(self):
+        '''
+            update the tranistion speed between colors
+        '''
+        self._speed = self._light.speed
 
     # this should be improved :-)
+    @callback
     def update_scene_list(self):
         self._scenes = []
         for id in self._light.SCENES:
             self._scenes.append(self._light.SCENES[id])
 
+    # move to pywizlight 0.2.6
     def scene_helper(self, scene):
         for id in self._light.SCENES:
             if self._light.SCENES[id] == scene:
