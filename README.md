@@ -18,7 +18,7 @@ If you want to try the integration please clone this repo to `<confdir>/custom_c
 
 Run `git clone https://github.com/sbidy/wiz_light` within the `<confdir>/custom_components/`.
 
-You also have to install the `pip install pywizlight` package.
+You also have to install the `pip install pywizlight` package. More infos? Check my git (pywizlight)[https://github.com/sbidy/pywizlight]
 
 ## HA config
 To enable the platform integration add 
