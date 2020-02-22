@@ -292,6 +292,7 @@ class WizBulb(Light):
 
     # this should be improved :-)
     def update_scene_list(self):
+        self._scenes = []
         for id in self._light.SCENES:
             self._scenes.append(self._light.SCENES[id])
 
