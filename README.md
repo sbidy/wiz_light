@@ -15,7 +15,7 @@ Working features
 ## Install for testing 
 If you want to try the integration please clone this repo to `<confdir>/custom_components/`.
 
-Run `git clone https://github.com/sbidy/wiz_light`
+Run `git clone https://github.com/sbidy/wiz_light` within the `<confdir>/custom_components/`.
 
 You also have to install the `pip install pywizlight` package.
 
