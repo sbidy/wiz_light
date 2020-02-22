@@ -188,7 +188,8 @@ class WizBulb(Light):
         if self._light.status is None:
             return
         try:
-            return self._light.status
+            self._state = self._light.status
+            return
         except Exception as ex:
             _LOGGER.error(ex)
             self._state = None
