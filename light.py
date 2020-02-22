@@ -290,11 +290,11 @@ class WizBulb(Light):
         self._effect = self._light.scene
     @callback
     def update_scene_list(self):
-        for key, value in self._light.SCENES():
+        for key, value in self._light.SCENES:
             self._scenes.append(value)
 
     def scene_helper(self, scene):
-        for key, value in self._light.SCENES():
+        for key, value in self._light.SCENES:
             if value == scene:
                 return key
             else:
