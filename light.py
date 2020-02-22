@@ -298,6 +298,6 @@ class WizBulb(Light):
     def scene_helper(self, scene):
         for id in self._light.SCENES:
             if self._light.SCENES[id] == scene:
-                return self._light.SCENES[id]
+                return id
             else:
                 return 0
