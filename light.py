@@ -37,7 +37,6 @@ from homeassistant.components.light import (
 from homeassistant.const import CONF_HOST, CONF_NAME
 
 _LOGGER = logging.getLogger(__name__)
-_VALID_STATES = [STATE_ON, STATE_OFF, "True", "False", "true", "false"]
 
 # Validation of the user's configuration
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
@@ -79,7 +78,6 @@ class WizBulb(Light):
         self._available = None
         self._effect = None
         self._scenes = []
-        self._speed = None
 
     @property
     def brightness(self):
@@ -87,13 +85,6 @@ class WizBulb(Light):
             Return the brightness of the light.
         """
         return self._brightness
-
-    @property
-    def transition(self):
-        """
-            Return the brightness of the light.
-        """
-        return self._speed
 
     @property
     def rgb_color(self):
@@ -136,9 +127,6 @@ class WizBulb(Light):
             self._light.colortemp = kelvin
         if ATTR_EFFECT in kwargs:
             self._light.scene = self.scene_helper(kwargs[ATTR_EFFECT])
-        if ATTR_TRANSITION in kwargs:
-            _LOGGER.info("transi: %s",kwargs[ATTR_TRANSITION])
-            self._speed = kwargs[ATTR_TRANSITION]
         self._light.turn_on()
 
     async def async_turn_off(self, **kwargs):
@@ -291,13 +279,6 @@ class WizBulb(Light):
             update the bulb availability
         '''
         self._effect = self._light.scene
-
-    @callback
-    def update_transition(self):
-        '''
-            update the tranistion speed between colors
-        '''
-        self._speed = self._light.speed
 
     # this should be improved :-)
     @callback
