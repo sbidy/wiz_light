@@ -133,7 +133,7 @@ class WizBulb(Light):
         """
             Return the coldest color_temp that this light supports.
         """
-        color_utils.color_temperature_kelvin_to_mired(6500)
+        return color_utils.color_temperature_kelvin_to_mired(6500)
 
     @property
     def max_mireds(self):
@@ -198,7 +198,6 @@ class WizBulb(Light):
         if self._light.colortemp is None:
             return
         try:
-            _LOGGER.info("%s Kelvin von Lampe", self._light.colortemp)
             temperature = color_utils.color_temperature_kelvin_to_mired(self._light.colortemp)
             if self.min_mireds <= temperature <= self.max_mireds:
                 self._temperature = temperature
@@ -220,6 +219,10 @@ class WizBulb(Light):
             return
         try:
             r, g, b = self._light.rgb
+            if r is None:
+                # this is the case if the temperature was changed - no infomation was return form the lamp.
+                # Maybe switch to withe ?
+                return
             color = color_utils.color_RGB_to_hs(r,g,b)
             if color is not None:
                 _LOGGER.info("%s HS Color", color)
