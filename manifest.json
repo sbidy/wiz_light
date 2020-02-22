@@ -4,5 +4,5 @@
     "documentation": "https://github.com/sbidy/wiz_light",
     "dependencies": [],
     "codeowners": ["@sbidy"],
-    "requirements": ["pywizlight==0.2.2"]
+    "requirements": ["pywizlight==0.2.4"]
   }

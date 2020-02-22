@@ -25,5 +25,5 @@ To enable the platform integration add
 light:
   - platform: wiz_light
     name: <Name of the device>
-    ip: <IP of the bulb>
+    host: <IP of the bulb>
 ```
