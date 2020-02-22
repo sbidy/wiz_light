@@ -137,6 +137,7 @@ class WizBulb(Light):
         if ATTR_EFFECT in kwargs:
             self._light.scene = self.scene_helper(kwargs[ATTR_EFFECT])
         if ATTR_TRANSITION in kwargs:
+            _LOGGER.info("transi: %s",kwargs[ATTR_TRANSITION])
             self._speed = kwargs[ATTR_TRANSITION]
         self._light.turn_on()
 
