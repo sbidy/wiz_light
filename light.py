@@ -31,8 +31,6 @@ from homeassistant.components.light import (
     ATTR_HS_COLOR,
     SUPPORT_EFFECT,
     ATTR_EFFECT,
-    ATTR_TRANSITION,
-    SUPPORT_TRANSITION
     )
 from homeassistant.const import CONF_HOST, CONF_NAME
 
@@ -44,7 +42,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_NAME): cv.string,
 })
 
-SUPPORT_FEATURES = (SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT | SUPPORT_TRANSITION)
+SUPPORT_FEATURES = (SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT )
 
 def setup_platform(hass, config, add_entities, discovery_info=None):
     """
@@ -189,11 +187,7 @@ class WizBulb(Light):
         self.update_temperature()
         self.update_color()
         self.update_effect()
-        self.update_transition()
         self.update_scene_list()
-
-        # deprecated - should be deleted
-        # self._rgb_color = self._light.rgb
 
 # ---- CALLBACKS -----
     @callback
