@@ -127,7 +127,7 @@ class WizBulb(Light):
             kelvin = color_utils.color_temperature_mired_to_kelvin(kwargs[ATTR_COLOR_TEMP])
             self._light.colortemp = kelvin
         if ATTR_EFFECT in kwargs:
-            _LOGGER.info("Effekt %s", ATTR_EFFECT)
+            _LOGGER.info("Effekt %s", kwargs[ATTR_EFFECT])
             self._light.scene = self.scene_helper(kwargs[ATTR_EFFECT])
         self._light.turn_on()
 
@@ -300,5 +300,3 @@ class WizBulb(Light):
         for id in self._light.SCENES:
             if self._light.SCENES[id] == scene:
                 return id
-            else:
-                return 0
