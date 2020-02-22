@@ -6,6 +6,7 @@ Working features
  - Color (RGB)
  - White Color Temprature
  - On/Off
+ - Effects
 
  Next up:
   - Some improvements and bugfixes to create a more stable integration
