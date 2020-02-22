@@ -15,7 +15,6 @@ import voluptuous as vol
 from pywizlight import wizlight
 from homeassistant.exceptions import InvalidStateError
 from homeassistant.core import callback
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from homeassistant.const import STATE_OFF, STATE_ON
 
