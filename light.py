@@ -78,6 +78,7 @@ class WizBulb(Light):
         self._hscolor = None
         self._available = None
         self._effect = None
+        self._scenes = []
 
     @property
     def brightness(self):
@@ -127,7 +128,7 @@ class WizBulb(Light):
             self._light.colortemp = kelvin
         if ATTR_EFFECT in kwargs:
             _LOGGER.info("Effekt %s", ATTR_EFFECT)
-            self._light.scene = kwargs[ATTR_EFFECT]
+            self._light.scene = self.scene_helper(kwargs[ATTR_EFFECT])
         self._light.turn_on()
 
     async def async_turn_off(self, **kwargs):
@@ -172,7 +173,7 @@ class WizBulb(Light):
     @property
     def effect_list(self):
         """Return the list of supported effects."""
-        return self._light.SCENES
+        return self._scenes
 
     @property
     def available(self):
@@ -190,7 +191,8 @@ class WizBulb(Light):
         self.update_temperature()
         self.update_color()
         self.update_effect()
-        
+        self.update_scene_list()
+
         # deprecated - should be deleted
         # self._rgb_color = self._light.rgb
 
@@ -286,3 +288,14 @@ class WizBulb(Light):
             update the bulb availability
         '''
         self._effect = self._light.scene
+    @callback
+    def update_scene_list(self):
+        for key, value in self._light.SCENES():
+            self._scenes.append(value)
+
+    def scene_helper(self, scene):
+        for key, value in self._light.SCENES():
+            if value == scene:
+                return key
+            else:
+                return 0
