@@ -3,6 +3,7 @@ A WiZ Light integration for Home Assistant.
 
 ## Next improvement:
 - deterministic selection of following bulb types: Only dimmable, dimmable + white color temprature (kelvin) and full RGB support also with white color temperatur. Maybe with an auto detect feature, try and error testing or via configuration YAML.
+- Prepare for hacs.xyz
 
 Working features 
  - Brigtness
