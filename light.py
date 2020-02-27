@@ -182,12 +182,13 @@ class WizBulb(Light):
         This is the only method that should fetch new data for Home Assistant.
         """
         self.update_availability()
-        self.update_state()
-        self.update_brightness()
-        self.update_temperature()
-        self.update_color()
-        self.update_effect()
-        self.update_scene_list()
+        if self._available is True:
+            self.update_state()
+            self.update_brightness()
+            self.update_temperature()
+            self.update_color()
+            self.update_effect()
+            self.update_scene_list()
 
 # ---- CALLBACKS -----
     @callback
