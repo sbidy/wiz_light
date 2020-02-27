@@ -265,7 +265,7 @@ class WizBulb(Light):
         '''
             update the bulb availability
         '''
-        self._available = self._light.getConnection
+        self._available = self._light.getConnection()
     
     @callback
     def update_effect(self):
