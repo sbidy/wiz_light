@@ -40,7 +40,9 @@ If you want to try the integration please clone this repo to `<confdir>/custom_c
 
 Run `git clone https://github.com/sbidy/wiz_light` within the `<confdir>/custom_components/`.
 
-You also have to install the `pywizlight` and `asyncio_dgram` packages (`pip install -r requirements.txt`). Questions? Check out the github project [pywizlight](https://github.com/sbidy/pywizlight)
+You also have to install the `pywizlight` packages (`pip install pywizlight`). 
+
+Questions? Check out the github project [pywizlight](https://github.com/sbidy/pywizlight)
 
 ## Testing
 See `test.py` for how the underlying API works
