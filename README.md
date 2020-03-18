@@ -21,9 +21,6 @@ Features:
 
 This component does need a dependency on `pywizlight` like @sbidy's component which will be install automatically by Home Assistant.
 
-## Next improvement:
-- Implement hacs.xyz structure
-
 ## Working features 
  - Brigtness
  - Color (RGB)
@@ -32,11 +29,12 @@ This component does need a dependency on `pywizlight` like @sbidy's component wh
  - Effects
  - Setting a rhythm as a scene
 
- Next up:
-  - testing with other hardware -- **Contribution required !!**
-  - Config Flow Support
-  - Pull to the HA master
-
+## Next improvement:
+- Implement hacs.xyz structure
+- testing with other hardware -- **Contribution required !!**
+- Config Flow Support
+- Pull to the HA master
+  
 ## Install for testing 
 If you want to try the integration please clone this repo to `<confdir>/custom_components/`.
 
