@@ -10,7 +10,8 @@
 
 import logging
 import voluptuous as vol
-from pywizlight import wizlight
+from .wizlight import wizlight, PilotBuilder, PilotParser
+from .scenes import SCENES
 from homeassistant.exceptions import InvalidStateError
 from homeassistant.core import callback
 
@@ -37,9 +38,10 @@ from homeassistant.const import CONF_HOST, CONF_NAME
 _LOGGER = logging.getLogger(__name__)
 
 # Validation of the user's configuration
+
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_HOST): cv.string,
-    vol.Required(CONF_NAME): cv.string,
+    vol.Required(CONF_NAME): cv.string
 })
 
 SUPPORT_FEATURES = (SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT )
@@ -114,24 +116,46 @@ class WizBulb(Light):
         """
             Instruct the light to turn on.
         """
+        # TODO: change this to set state using a single UDP call
+        #
+
+        
+        rgb = None
         if ATTR_RGB_COLOR in kwargs:
-            self._light.rgb = kwargs[ATTR_RGB_COLOR]
+           rgb = kwargs[ATTR_RGB_COLOR]
         if ATTR_HS_COLOR in kwargs:
-           self._light.rgb = color_utils.color_hs_to_RGB(kwargs[ATTR_HS_COLOR][0], kwargs[ATTR_HS_COLOR][1])
+           rgb = color_utils.color_hs_to_RGB(kwargs[ATTR_HS_COLOR][0], kwargs[ATTR_HS_COLOR][1])
+
+        brightness = None
         if ATTR_BRIGHTNESS in kwargs:
-           self._light.brightness = kwargs[ATTR_BRIGHTNESS]
+           brightness = kwargs[ATTR_BRIGHTNESS]
+
+        colortemp = None
         if ATTR_COLOR_TEMP in kwargs:
             kelvin = color_utils.color_temperature_mired_to_kelvin(kwargs[ATTR_COLOR_TEMP])
-            self._light.colortemp = kelvin
+            colortemp = kelvin
+
+        sceneid = None
         if ATTR_EFFECT in kwargs:
-            self._light.scene = self.scene_helper(kwargs[ATTR_EFFECT])
-        self._light.turn_on()
+            sceneid = self._light.get_id_from_scene_name(kwargs[ATTR_EFFECT])
+
+        if sceneid == 1000: #rhythm
+            pilot = PilotBuilder()
+        else:
+            pilot = PilotBuilder(
+                    rgb = rgb,
+                    brightness = brightness,
+                    colortemp = colortemp,
+                    scene = sceneid
+                )
+
+        await self._light.turn_on(pilot)
 
     async def async_turn_off(self, **kwargs):
         """
             Instruct the light to turn off.
         """
-        self._light.turn_off()
+        await self._light.turn_off()
 
     @property
     def color_temp(self):
@@ -181,25 +205,47 @@ class WizBulb(Light):
         Fetch new state data for this light.
         This is the only method that should fetch new data for Home Assistant.
         """
-        self.update_availability()
-        if self._available is True:
-            self.update_state()
+        await self.update_state()
+
+        if self._state != None and self._state != False:
             self.update_brightness()
             self.update_temperature()
             self.update_color()
             self.update_effect()
             self.update_scene_list()
 
-# ---- CALLBACKS -----
-    @callback
+    async def update_state_available(self):
+        self._state = self._light.status
+        self._available = True
+
+    async def update_state_unavailable(self):
+        self._state = False
+        self._available = False
+
+    async def update_state(self):
+        """
+            Update the state
+        """
+        try:
+            _LOGGER.debug("[wizlight {}] updating state".format(self._light.ip))
+            await self._light.updateState()
+            if self._light.state == None:
+                await self.update_state_unavailable()
+            else:
+                await self.update_state_available()
+        except Exception as ex:
+            _LOGGER.error(ex)
+            await self.update_state_unavailable()
+        _LOGGER.debug("[wizlight {}] updated state: {}".format(self._light.ip, self._state))
+
     def update_brightness(self):
         """
             Update the brightness.
         """
-        if self._light.brightness is None:
+        if self._light.state.get_brightness() is None:
             return
         try:
-            brightness = self._light.brightness
+            brightness = self._light.state.get_brightness()
             if 0 <= int(brightness) <= 255:
                 self._brightness = int(brightness)
             else:
@@ -210,41 +256,28 @@ class WizBulb(Light):
         except Exception as ex:
             _LOGGER.error(ex)
             self._state = None
-    @callback
-    def update_state(self):
-        """
-            Update the state
-        """
-        if self._light.status is None:
-            return
-        try:
-            self._state = self._light.status
-            return
-        except Exception as ex:
-            _LOGGER.error(ex)
-            self._state = None
-    @callback
+
     def update_temperature(self):
         """
             Update the temperature
         """
-        if self._light.colortemp is None:
+        if self._light.state.get_colortemp() is None:
             return
         try:
-            temperature = color_utils.color_temperature_kelvin_to_mired(self._light.colortemp)
+            temperature = color_utils.color_temperature_kelvin_to_mired(self._light.state.get_colortemp())
             self._temperature = temperature
         except Exception:
             _LOGGER.error("Cannot evaluate temperature", exc_info=True)
             self._temperature = None
-    @callback
+
     def update_color(self):
         """
             Update the hs color
         """
-        if self._light.rgb is None:
+        if self._light.state.get_rgb() is None:
             return
         try:
-            r, g, b = self._light.rgb
+            r, g, b = self._light.state.get_rgb()
             if r is None:
                 # this is the case if the temperature was changed - no infomation was return form the lamp.
                 # do nothing until the RGB color was changed
@@ -260,30 +293,15 @@ class WizBulb(Light):
         except Exception:
             _LOGGER.error("Cannot evaluate color", exc_info=True)
             self._hscolor = None
-
-    @callback
-    def update_availability(self):
-        '''
-            update the bulb availability
-        '''
-        self._available = self._light.getConnection()
     
-    @callback
     def update_effect(self):
         '''
-            update the bulb availability
+            update the bulb scene
         '''
-        self._effect = self._light.scene
+        self._effect = self._light.state.get_scene()
 
-    # this should be improved :-)
-    @callback
+    # TODO: this should be improved :-)
     def update_scene_list(self):
         self._scenes = []
-        for id in self._light.SCENES:
-            self._scenes.append(self._light.SCENES[id])
-
-    # move to pywizlight 0.2.6
-    def scene_helper(self, scene):
-        for id in self._light.SCENES:
-            if self._light.SCENES[id] == scene:
-                return id
+        for id in SCENES:
+            self._scenes.append(SCENES[id])
