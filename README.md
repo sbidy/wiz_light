@@ -2,7 +2,7 @@
 A Home assistant integration for (Phillips, SLV and more) WiZ Light bulbs
 A compatibility list will be created soon ;-).
 
-# Kudos and contributions
+## Kudos and contributions
 Thank you [@angadsingh](https://github.com/angadsingh) for make such incredible improvements!!
 
 Bug fixes:
