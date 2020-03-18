@@ -1,7 +1,7 @@
 import asyncio
 import asyncio_dgram
 import time
-from .wizlight import wizlight, PilotBuilder
+from pywizlight import wizlight, PilotBuilder
 import logging
 import sys
 
@@ -58,8 +58,8 @@ async def testbulb(bulb):
 
 async def run_bulb_automation():
 	loop = asyncio.get_event_loop()
-	bulb1 = wizlight('192.168.1.58')
-	bulb2 = wizlight('192.168.1.7')
+	bulb1 = wizlight('192.168.178.95')
+	# bulb2 = wizlight('192.168.1.7')
 	# await asyncio.gather(testbulb(bulb1), testbulb(bulb2), loop = loop)
 	state = await bulb1.updateState()
 	await bulb1.turn_on(PilotBuilder(scene = 14))

@@ -1,13 +1,3 @@
-'''
-    ToDO:
-        - Change ATTR_BRIGHTNESS to ATTR_BRIGHTNESS_PCT ??
-        - ATTR_EFFECT_LIST - List of possible effects
-'''
-
-
-"""Platform for light integration."""
-''' Stephan Traub @sbidy '''
-
 import logging
 import voluptuous as vol
 from pywizlight.bulb import wizlight, PilotBuilder, PilotParser
@@ -19,6 +9,7 @@ from homeassistant.const import STATE_OFF, STATE_ON
 
 import homeassistant.util.color as color_utils
 import homeassistant.helpers.config_validation as cv
+
 # Import the device class from the component that you want to support
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
@@ -32,19 +23,21 @@ from homeassistant.components.light import (
     ATTR_HS_COLOR,
     SUPPORT_EFFECT,
     ATTR_EFFECT,
-    )
+)
 from homeassistant.const import CONF_HOST, CONF_NAME
 
 _LOGGER = logging.getLogger(__name__)
 
 # Validation of the user's configuration
 
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    vol.Required(CONF_HOST): cv.string,
-    vol.Required(CONF_NAME): cv.string
-})
+PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+    {vol.Required(CONF_HOST): cv.string, vol.Required(CONF_NAME): cv.string}
+)
 
-SUPPORT_FEATURES = (SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT )
+SUPPORT_FEATURES = (
+    SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
+)
+
 
 def setup_platform(hass, config, add_entities, discovery_info=None):
     """
@@ -54,10 +47,8 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     # The configuration check takes care they are present.
     ip = config[CONF_HOST]
     bulb = wizlight(ip)
-
     # Add devices
     add_entities([WizBulb(bulb, config[CONF_NAME])])
-
 
 class WizBulb(Light):
     """
@@ -119,35 +110,35 @@ class WizBulb(Light):
         # TODO: change this to set state using a single UDP call
         #
 
-        
         rgb = None
         if ATTR_RGB_COLOR in kwargs:
-           rgb = kwargs[ATTR_RGB_COLOR]
+            rgb = kwargs[ATTR_RGB_COLOR]
         if ATTR_HS_COLOR in kwargs:
-           rgb = color_utils.color_hs_to_RGB(kwargs[ATTR_HS_COLOR][0], kwargs[ATTR_HS_COLOR][1])
+            rgb = color_utils.color_hs_to_RGB(
+                kwargs[ATTR_HS_COLOR][0], kwargs[ATTR_HS_COLOR][1]
+            )
 
         brightness = None
         if ATTR_BRIGHTNESS in kwargs:
-           brightness = kwargs[ATTR_BRIGHTNESS]
+            brightness = kwargs[ATTR_BRIGHTNESS]
 
         colortemp = None
         if ATTR_COLOR_TEMP in kwargs:
-            kelvin = color_utils.color_temperature_mired_to_kelvin(kwargs[ATTR_COLOR_TEMP])
+            kelvin = color_utils.color_temperature_mired_to_kelvin(
+                kwargs[ATTR_COLOR_TEMP]
+            )
             colortemp = kelvin
 
         sceneid = None
         if ATTR_EFFECT in kwargs:
             sceneid = self._light.get_id_from_scene_name(kwargs[ATTR_EFFECT])
 
-        if sceneid == 1000: #rhythm
+        if sceneid == 1000:  # rhythm
             pilot = PilotBuilder()
         else:
             pilot = PilotBuilder(
-                    rgb = rgb,
-                    brightness = brightness,
-                    colortemp = colortemp,
-                    scene = sceneid
-                )
+                rgb=rgb, brightness=brightness, colortemp=colortemp, scene=sceneid
+            )
 
         await self._light.turn_on(pilot)
 
@@ -184,26 +175,32 @@ class WizBulb(Light):
             Flag supported features.
         """
         return SUPPORT_FEATURES
-    
+
     @property
     def effect(self):
-        """Return the current effect."""
+        """
+            Return the current effect.
+        """
         return self._effect
 
     @property
     def effect_list(self):
-        """Return the list of supported effects."""
+        """
+            Return the list of supported effects.
+        """
         return self._scenes
 
     @property
     def available(self):
-        """Return if light is available."""
+        """
+            Return if light is available.
+        """
         return self._available
 
     async def async_update(self):
         """
-        Fetch new state data for this light.
-        This is the only method that should fetch new data for Home Assistant.
+            Fetch new state data for this light.
+            This is the only method that should fetch new data for Home Assistant.
         """
         await self.update_state()
 
@@ -236,7 +233,9 @@ class WizBulb(Light):
         except Exception as ex:
             _LOGGER.error(ex)
             await self.update_state_unavailable()
-        _LOGGER.debug("[wizlight {}] updated state: {}".format(self._light.ip, self._state))
+        _LOGGER.debug(
+            "[wizlight {}] updated state: {}".format(self._light.ip, self._state)
+        )
 
     def update_brightness(self):
         """
@@ -264,7 +263,9 @@ class WizBulb(Light):
         if self._light.state.get_colortemp() is None:
             return
         try:
-            temperature = color_utils.color_temperature_kelvin_to_mired(self._light.state.get_colortemp())
+            temperature = color_utils.color_temperature_kelvin_to_mired(
+                self._light.state.get_colortemp()
+            )
             self._temperature = temperature
         except Exception:
             _LOGGER.error("Cannot evaluate temperature", exc_info=True)
@@ -282,22 +283,20 @@ class WizBulb(Light):
                 # this is the case if the temperature was changed - no infomation was return form the lamp.
                 # do nothing until the RGB color was changed
                 return
-            color = color_utils.color_RGB_to_hs(r,g,b)
+            color = color_utils.color_RGB_to_hs(r, g, b)
             if color is not None:
                 self._hscolor = color
             else:
-                _LOGGER.error(
-                    "Received invalid HS color : %s", color
-                )
+                _LOGGER.error("Received invalid HS color : %s", color)
                 self._hscolor = None
         except Exception:
             _LOGGER.error("Cannot evaluate color", exc_info=True)
             self._hscolor = None
-    
+
     def update_effect(self):
-        '''
+        """
             update the bulb scene
-        '''
+        """
         self._effect = self._light.state.get_scene()
 
     # TODO: this should be improved :-)

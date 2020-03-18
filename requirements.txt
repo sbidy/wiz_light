@@ -1,2 +1,0 @@
-pywizlight==0.2.5
-asyncio_dgram==1.0.1
