@@ -24,7 +24,7 @@ from homeassistant.components.light import (
     SUPPORT_EFFECT,
     ATTR_EFFECT,
 )
-from homeassistant.const import CONF_HOST, CONF_NAME, CONF_PORT
+from homeassistant.const import CONF_HOST, CONF_NAME
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -32,8 +32,7 @@ _LOGGER = logging.getLogger(__name__)
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {vol.Required(CONF_HOST): cv.string,
-    vol.Required(CONF_NAME): cv.string,
-    vol.Optional(CONF_PORT): cv.string}
+    vol.Required(CONF_NAME): cv.string}
 )
 
 SUPPORT_FEATURES = (
