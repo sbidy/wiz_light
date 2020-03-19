@@ -24,14 +24,16 @@ from homeassistant.components.light import (
     SUPPORT_EFFECT,
     ATTR_EFFECT,
 )
-from homeassistant.const import CONF_HOST, CONF_NAME
+from homeassistant.const import CONF_HOST, CONF_NAME, CONF_PORT
 
 _LOGGER = logging.getLogger(__name__)
 
 # Validation of the user's configuration
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
-    {vol.Required(CONF_HOST): cv.string, vol.Required(CONF_NAME): cv.string}
+    {vol.Required(CONF_HOST): cv.string,
+    vol.Required(CONF_NAME): cv.string,
+    vol.Optional(CONF_PORT): cv.string}
 )
 
 SUPPORT_FEATURES = (
