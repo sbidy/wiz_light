@@ -25,7 +25,7 @@ from homeassistant.components.light import (
     ATTR_EFFECT,
 )
 from homeassistant.const import CONF_HOST, CONF_NAME
-
+ 
 _LOGGER = logging.getLogger(__name__)
 
 # Validation of the user's configuration
