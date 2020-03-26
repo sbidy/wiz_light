@@ -36,9 +36,9 @@ This component does need a dependency on `pywizlight` like @sbidy's component wh
 - Pull to the HA master
   
 ## Install for testing 
-If you want to try the integration please clone this repo to `<confdir>/custom_components/`.
+If you want to try the integration please clone this repo to `<confdir>`.
 
-Run `git clone https://github.com/sbidy/wiz_light` within the `<confdir>/custom_components/`.
+Run `git clone https://github.com/sbidy/wiz_light` within the HA `<confdir>`.
 
 You also have to install the `pywizlight` packages (`pip install pywizlight`). 
 
