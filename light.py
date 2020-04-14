@@ -333,7 +333,7 @@ class WizBulb(Light):
             bulb_config = await self._light.getBulbConfig()
             if 'moduleName' in bulb_config['result']:
                 self._bulbType = bulb_config['result']['moduleName']
-                _LOGGER.info(self._bulbType)
+                _LOGGER.info("Initiate the WiZ bulb as %s", self._bulbType)
 
     # TODO: this should be improved :-)
     def update_scene_list(self):
