@@ -21,6 +21,15 @@ Features:
 
 This component does need a dependency on `pywizlight` like @sbidy's component which will be install automatically by Home Assistant.
 
+## Bulbs
+ESP01_SHDW_01 = Warm wite without any features. Dimmable
+
+ESP01_SHRGB1C_31 = Full RGB Collor
+
+ESP01_SHTW1C_31 = Warm and cold wihte
+
+`echo '{"method":"getSystemConfig","params":{}}' | nc -u -w 1 <YOU BULB IP> 38899`
+
 ## Working features 
  - Brigtness
  - Color (RGB)
