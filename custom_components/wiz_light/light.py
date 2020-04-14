@@ -35,11 +35,11 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     vol.Required(CONF_NAME): cv.string}
 )
 
-temp_features = None
-SUPPORT_FEATURES = temp_features
+SUPPORT_FEATURES_RGB = (SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT)
+SUPPORT_FEATURES_DIM = (SUPPORT_BRIGHTNESS)
+SUPPORT_FEATURES_WHITE = (SUPPORT_BRIGHTNESS | SUPPORT_COLOR_TEMP)
 
-
-def setup_platform(hass, config, add_entities, discovery_info=None):
+async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """
         Set up the WiZ Light platform.
     """
@@ -47,25 +47,9 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     # The configuration check takes care they are present.
     ip = config[CONF_HOST]
     bulb = wizlight(ip)
-    bulb_config = bulb.getBulbConfig()
-    if 'moduleName' in bulb_config:
-        # only dimmer
-        if bulb_config['moduleName'] == 'ESP01_SHDW_01':
-            _LOGGER.info("Found ESP01_SHDW_01 bulb")
-            temp_features = (
-                SUPPORT_BRIGHTNESS)
-        # full feature RGB
-        if bulb_config['moduleName'] == 'ESP01_SHRGB1C_31':
-            _LOGGER.info("Found ESP01_SHRGB1C_31")
-            temp_features = (
-                SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT)
-        # Color Temp and dimmer
-        if bulb_config['moduleName'] == 'ESP01_SHTW1C_31':
-            _LOGGER.info("Found ESP01_SHTW1C_31")
-            temp_features = (
-                SUPPORT_BRIGHTNESS | SUPPORT_COLOR_TEMP )
+    
     # Add devices
-    add_entities([WizBulb(bulb, config[CONF_NAME])])
+    async_add_entities([WizBulb(bulb, config[CONF_NAME])])
 
 
 class WizBulb(Light):
@@ -87,6 +71,7 @@ class WizBulb(Light):
         self._available = None
         self._effect = None
         self._scenes = []
+        self._bulbType = None
 
     @property
     def brightness(self):
@@ -192,7 +177,29 @@ class WizBulb(Light):
         """
             Flag supported features.
         """
-        return SUPPORT_FEATURES
+        # only dimmer - not tested
+        if self._bulbType == 'ESP01_SHDW_01':
+            _LOGGER.info("Found ESP01_SHDW_01 bulb")
+            return SUPPORT_BRIGHTNESS
+        # Color Temp and dimmer - not tested
+        if self._bulbType == 'ESP01_SHTW1C_31':
+            _LOGGER.info("Found ESP01_SHTW1C_31 bulb")
+            return SUPPORT_BRIGHTNESS | SUPPORT_COLOR_TEMP
+        # Firlament bulbs support only dimmer
+        if self._bulbType == 'ESP56_SHTW3_01':
+            _LOGGER.info("Found ESP56_SHTW3_01 bulb")
+            return SUPPORT_BRIGHTNESS
+        # Full feature support (color) - not tested
+        if self._bulbType == 'ESP01_SHRGB1C_31':
+            _LOGGER.info("Found ESP01_SHRGB1C_31")
+            return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
+        # Also full featured bulb (tested)
+        if self._bulbType == 'ESP01_SHRGB_03':
+            _LOGGER.info("Found ESP01_SHRGB_03")
+            return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
+        # fall back
+        _LOGGER.error("No bulb type can be detected - fall back to full feature")
+        return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
 
     @property
     def effect(self):
@@ -223,6 +230,7 @@ class WizBulb(Light):
         await self.update_state()
 
         if self._state != None and self._state != False:
+            await self.get_bulb_type()
             self.update_brightness()
             self.update_temperature()
             self.update_color()
@@ -316,6 +324,16 @@ class WizBulb(Light):
             update the bulb scene
         """
         self._effect = self._light.state.get_scene()
+
+    async def get_bulb_type(self):
+        """
+            get the bulb type
+        """
+        if self._bulbType is None:
+            bulb_config = await self._light.getBulbConfig()
+            if 'moduleName' in bulb_config['result']:
+                self._bulbType = bulb_config['result']['moduleName']
+                _LOGGER.info(self._bulbType)
 
     # TODO: this should be improved :-)
     def update_scene_list(self):
