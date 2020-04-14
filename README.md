@@ -28,8 +28,10 @@ This component does need a dependency on `pywizlight` like @sbidy's component wh
 | ESP01_SHRGB1C_31 | X | X  | X | X |
 | ESP01_SHTW1C_31 | X | X |   |   |
 | ESP56_SHTW3_01 | X |   | (X)  |   |
+| ESP01_SHRGB_03 | X | X | X | X |
 
 Please report as issue your builb type with a feature list:
+
 `echo '{"method":"getSystemConfig","params":{}}' | nc -u -w 1 <YOU BULB IP> 38899`
 
 ## Working features 
