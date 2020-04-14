@@ -35,9 +35,8 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     vol.Required(CONF_NAME): cv.string}
 )
 
-SUPPORT_FEATURES = (
-    SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
-)
+temp_features = None
+SUPPORT_FEATURES = temp_features
 
 
 def setup_platform(hass, config, add_entities, discovery_info=None):
@@ -48,8 +47,26 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     # The configuration check takes care they are present.
     ip = config[CONF_HOST]
     bulb = wizlight(ip)
+    bulb_config = bulb.getBulbConfig()
+    if 'moduleName' in bulb_config:
+        # only dimmer
+        if bulb_config['moduleName'] == 'ESP01_SHDW_01':
+            _LOGGER.info("Found ESP01_SHDW_01 bulb")
+            temp_features = (
+                SUPPORT_BRIGHTNESS)
+        # full feature RGB
+        if bulb_config['moduleName'] == 'ESP01_SHRGB1C_31':
+            _LOGGER.info("Found ESP01_SHRGB1C_31")
+            temp_features = (
+                SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT)
+        # Color Temp and dimmer
+        if bulb_config['moduleName'] == 'ESP01_SHTW1C_31':
+            _LOGGER.info("Found ESP01_SHTW1C_31")
+            temp_features = (
+                SUPPORT_BRIGHTNESS | SUPPORT_COLOR_TEMP )
     # Add devices
     add_entities([WizBulb(bulb, config[CONF_NAME])])
+
 
 class WizBulb(Light):
     """
@@ -305,3 +322,4 @@ class WizBulb(Light):
         self._scenes = []
         for id in SCENES:
             self._scenes.append(SCENES[id])
+
