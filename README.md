@@ -43,17 +43,21 @@ Please report as issue your builb type with a feature list:
  - Setting a rhythm as a scene
 
 ## Next improvement:
-- Implement hacs.xyz structure
 - testing with other hardware -- **Contribution required !!**
 - Config Flow Support
 - Pull to the HA master
   
 ## Install for testing 
-If you want to try the integration please clone this repo to `<confdir>`.
 
-Run `git clone https://github.com/sbidy/wiz_light` within the HA `<confdir>`.
+1. Loggon to your HA or HASS with SSH
+2. Got to the HA `custom_components` dir within the HA installation path (if this is not available - create this directory).
+3. Run `cd custom_components`
+4. Run `git clone https://github.com/sbidy/wiz_light` within the `custom_components` dir
+5. Run `mv wiz_light/custom_components/wiz_light/* wiz_light/` to move the files in the correct diretory
+6. Restart your HA/HASS service in the UI with `<your-URL>/config/server_control`
+7. Add the bulbs to your `configuration.yaml` - You can not add the bulbs in the HA UI!! (configFlow is missing)
 
-You also have to install the `pywizlight` packages (`pip install pywizlight`). 
+As an alternativ youe the HACS platform for installation - see [HACS Website](https://hacs.xyz)
 
 Questions? Check out the github project [pywizlight](https://github.com/sbidy/pywizlight)
 
@@ -61,7 +65,7 @@ Questions? Check out the github project [pywizlight](https://github.com/sbidy/py
 See `test.py` for how the underlying API works
 
 ## HA config
-To enable the platform integration add 
+To enable the platform integration after installation add 
 ```
 light:
   - platform: wiz_light
