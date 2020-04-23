@@ -50,14 +50,14 @@ Please report as issue your builb type with a feature list:
 ## Install for testing 
 
 1. Loggon to your HA or HASS with SSH
-2. Got to the HA `custom_components` dir within the HA installation path (if this is not available - create this directory).
+2. Got to the HA `custom_components` directory within the HA installation path (if this is not available - create this directory).
 3. Run `cd custom_components`
-4. Run `git clone https://github.com/sbidy/wiz_light` within the `custom_components` dir
+4. Run `git clone https://github.com/sbidy/wiz_light` within the `custom_components` directory
 5. Run `mv wiz_light/custom_components/wiz_light/* wiz_light/` to move the files in the correct diretory
 6. Restart your HA/HASS service in the UI with `<your-URL>/config/server_control`
 7. Add the bulbs to your `configuration.yaml` - You can not add the bulbs in the HA UI!! (configFlow is missing)
 
-As an alternativ youe the HACS platform for installation - see [HACS Website](https://hacs.xyz)
+As an alternativ you can use the HACS platform for installation - see [HACS Website](https://hacs.xyz)
 
 Questions? Check out the github project [pywizlight](https://github.com/sbidy/pywizlight)
 
