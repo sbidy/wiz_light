@@ -179,26 +179,20 @@ class WizBulb(Light):
         """
         # only dimmer - not tested
         if self._bulbType == 'ESP01_SHDW_01':
-            _LOGGER.info("Found ESP01_SHDW_01 bulb")
             return SUPPORT_BRIGHTNESS
         # Color Temp and dimmer - not tested
         if self._bulbType == 'ESP01_SHTW1C_31':
-            _LOGGER.info("Found ESP01_SHTW1C_31 bulb")
             return SUPPORT_BRIGHTNESS | SUPPORT_COLOR_TEMP
-        # Firlament bulbs support only dimmer
+        # Firlament bulbs support only dimmer (tested)
         if self._bulbType == 'ESP56_SHTW3_01':
-            _LOGGER.info("Found ESP56_SHTW3_01 bulb")
-            return SUPPORT_BRIGHTNESS
+            return SUPPORT_BRIGHTNESS | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
         # Full feature support (color) - not tested
         if self._bulbType == 'ESP01_SHRGB1C_31':
-            _LOGGER.info("Found ESP01_SHRGB1C_31")
             return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
         # Also full featured bulb (tested)
         if self._bulbType == 'ESP01_SHRGB_03':
-            _LOGGER.info("Found ESP01_SHRGB_03")
             return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
         # fall back
-        _LOGGER.error("No bulb type can be detected - fall back to full feature")
         return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
 
     @property
@@ -213,6 +207,9 @@ class WizBulb(Light):
         """
             Return the list of supported effects.
         """
+        # Special filament bulb type
+        if self._bulbType == 'ESP56_SHTW3_01':
+            return [self._scenes[key] for key in [8,9,14,15,17,28,29,31]]
         return self._scenes
 
     @property
