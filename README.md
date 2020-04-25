@@ -23,13 +23,13 @@ Features:
 This component does need a dependency on `pywizlight` like @sbidy's component which will be install automatically by Home Assistant.
 
 ## Bulbs
-| Bulb Type | Dimmer | Color Temp | Effects | RGB || Tested? |
-|-----------|--------|------------|---------|-----||-----|
-| ESP01_SHDW_01 | X  |   |   |   ||  |
-| ESP01_SHRGB1C_31 | X | X  | X | X ||  |
-| ESP01_SHTW1C_31 | X | X |   |   ||  |
-| ESP56_SHTW3_01 | X |  X  | X  |   || X |
-| ESP01_SHRGB_03 | X | X | X | X || X |
+| Bulb Type | Dimmer | Color Temp | Effects | RGB | Tested? |
+|-----------|--------|------------|---------|-----|-----|
+| ESP01_SHDW_01 | X  |   |   |   |  |
+| ESP01_SHRGB1C_31 | X | X  | X | X |  |
+| ESP01_SHTW1C_31 | X | X |   |   |  |
+| ESP56_SHTW3_01 | X |  X  | X  |   | X |
+| ESP01_SHRGB_03 | X | X | X | X | X |
 
 Please report as issue your builb type with a feature list:
 
