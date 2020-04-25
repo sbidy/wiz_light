@@ -186,6 +186,9 @@ class WizBulb(Light):
         # Firlament bulbs support only dimmer (tested)
         if self._bulbType == 'ESP56_SHTW3_01':
             return SUPPORT_BRIGHTNESS | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
+        # Philips Wiz Filament - not tested
+        if self._bulbType == 'ESP06_SHDW9_01':
+            return SUPPORT_BRIGHTNESS | SUPPORT_EFFECT
         # Full feature support (color) - not tested
         if self._bulbType == 'ESP01_SHRGB1C_31':
             return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
@@ -210,6 +213,9 @@ class WizBulb(Light):
         # Special filament bulb type
         if self._bulbType == 'ESP56_SHTW3_01':
             return [self._scenes[key] for key in [8,9,14,15,17,28,29,31]]
+        # Philips filament bulb // White, Night Light, Candlelight, Pulse, and Steampunk
+        if self._bulbType == 'ESP06_SHDW9_01':
+            return [self._scenes[key] for key in [9,28,30,31]]
         return self._scenes
 
     @property
