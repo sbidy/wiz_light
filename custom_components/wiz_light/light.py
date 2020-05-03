@@ -1,4 +1,4 @@
-"""WiZ Light integration"""
+"""WiZ Light integration."""
 import logging
 
 from pywizlight import SCENES, PilotBuilder, wizlight
