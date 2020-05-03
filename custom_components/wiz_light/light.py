@@ -246,7 +246,7 @@ class WizBulb(Light):
         if self._bulbType == 'ESP56_SHTW3_01':
             return [self._scenes[key] for key in [8,9,14,15,17,28,29,31]]
         # Filament bulb without white color led
-        if self._bulbType == 'ESP06_SHDW9_01'
+        if self._bulbType == 'ESP06_SHDW9_01':
              return [self._scenes[key] for key in [8,9,13,28,30,29,31]]
         return self._scenes
 
@@ -292,7 +292,7 @@ class WizBulb(Light):
             else:
                 await self.update_state_available()
         except Exception as ex:
-            _LOGGER.error(ex)
+            _LOGGER.error("Bulb not available or can't be reached!")
             await self.update_state_unavailable()
         _LOGGER.debug(
             "[wizlight {}] updated state: {}".format(self._light.ip, self._state)
