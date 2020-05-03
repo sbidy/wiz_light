@@ -277,7 +277,9 @@ class WizBulb(Light):
             self._hscolor = None
 
     def update_effect(self):
-        """Update the bulb scene."""
+        """
+        Update the bulb scene.
+        """
         self._effect = self._light.state.get_scene()
 
     async def get_bulb_type(self):
