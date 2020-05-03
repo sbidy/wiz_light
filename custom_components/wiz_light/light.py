@@ -13,9 +13,6 @@ from homeassistant.components.light import (
     ATTR_RGB_COLOR,
     PLATFORM_SCHEMA,
     SUPPORT_BRIGHTNESS,
-    
-    
-    
     SUPPORT_COLOR,
     SUPPORT_COLOR_TEMP,
     SUPPORT_EFFECT,
