@@ -176,10 +176,14 @@ class WizBulb(Light):
     def supported_features(self) -> int:
         """
             Flag supported features.
+            TODO: Should be updated and maybe moved to a seperatea function
         """
         # only dimmer - not tested
-        if self._bulbType == 'ESP01_SHDW_01':
+        if self._bulbType == 'ESP01_SHDW_01' or self._bulbType == 'ESP01_SHDW1_31':
             return SUPPORT_BRIGHTNESS
+        # Support dimmer and effects
+        if self._bulbType == 'ESP06_SHDW9_01':
+            return SUPPORT_BRIGHTNESS | SUPPORT_EFFECT
         # Color Temp and dimmer - not tested
         if self._bulbType == 'ESP01_SHTW1C_31':
             return SUPPORT_BRIGHTNESS | SUPPORT_COLOR_TEMP
@@ -187,10 +191,8 @@ class WizBulb(Light):
         if self._bulbType == 'ESP56_SHTW3_01':
             return SUPPORT_BRIGHTNESS | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
         # Full feature support (color) - not tested
-        if self._bulbType == 'ESP01_SHRGB1C_31':
-            return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
-        # Also full featured bulb (tested)
-        if self._bulbType == 'ESP01_SHRGB_03':
+        # TODO: Maybe switch to "contains RGB"
+        if self._bulbType == 'ESP01_SHRGB1C_31' or self._bulbType == 'ESP01_SHRGB_03':
             return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
         # fall back
         return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
@@ -206,10 +208,46 @@ class WizBulb(Light):
     def effect_list(self):
         """
             Return the list of supported effects.
+            0:"Ocean",
+            1:"Romance",
+            2:"Sunset",
+            3:"Party",
+            4:"Fireplace",
+            5:"Cozy",
+            6:"Forest",
+            7:"Pastel Colors",
+            8:"Wake up",
+            9:"Bedtime",
+            10:"Warm White",
+            11:"Daylight",
+            12:"Cool white",
+            13:"Night light",
+            14:"Focus",
+            15:"Relax",
+            16:"True colors",
+            17:"TV time",
+            18:"Plantgrowth",
+            19:"Spring",
+            20:"Summer",
+            21:"Fall",
+            22:"Deepdive",
+            23:"Jungle",
+            24:"Mojito",
+            25:"Club",
+            26:"Christmas",
+            27:"Halloween",
+            28:"Candlelight",
+            29:"Golden white",
+            30:"Pulse",
+            31:"Steampunk",
+            1000:"Rhythm"
         """
         # Special filament bulb type
         if self._bulbType == 'ESP56_SHTW3_01':
             return [self._scenes[key] for key in [8,9,14,15,17,28,29,31]]
+        # Filament bulb without white color led
+        if self._bulbType == 'ESP06_SHDW9_01'
+             return [self._scenes[key] for key in [8,9,13,28,30,29,31]]
         return self._scenes
 
     @property
