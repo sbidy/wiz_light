@@ -1,3 +1,4 @@
+![Lint](https://github.com/sbidy/wiz_light/workflows/Lint/badge.svg) 
 # wiz_light
 A Home assistant integration for (Phillips, SLV and more) WiZ Light bulbs
 
