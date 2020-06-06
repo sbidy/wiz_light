@@ -222,7 +222,8 @@ class WizBulb(Light):
         except Exception as ex:
             _LOGGER.error(ex)
             await self.update_state_unavailable()
-        _LOGGER.debug("[wizlight %s] updated state: %s", self._light.ip, self._state)
+        _LOGGER.debug("[wizlight %s] updated state: %s",
+                      self._light.ip, self._state)
 
     def update_brightness(self):
         """Update the brightness."""
@@ -244,11 +245,12 @@ class WizBulb(Light):
 
     def update_temperature(self):
         """Update the temperature."""
-        if self._light.state.get_colortemp() is None:
+        colortemp = self._light.state.get_colortemp()
+        if colortemp is None or colortemp == 0:
             return
         try:
             temperature = color_utils.color_temperature_kelvin_to_mired(
-                self._light.state.get_colortemp()
+                colortemp
             )
             self._temperature = temperature
 
