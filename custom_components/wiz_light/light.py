@@ -222,8 +222,7 @@ class WizBulb(Light):
         except Exception as ex:
             _LOGGER.error(ex)
             await self.update_state_unavailable()
-        _LOGGER.debug("[wizlight %s] updated state: %s",
-                      self._light.ip, self._state)
+        _LOGGER.debug("[wizlight %s] updated state: %s", self._light.ip, self._state)
 
     def update_brightness(self):
         """Update the brightness."""
@@ -249,9 +248,7 @@ class WizBulb(Light):
         if colortemp is None or colortemp == 0:
             return
         try:
-            temperature = color_utils.color_temperature_kelvin_to_mired(
-                colortemp
-            )
+            temperature = color_utils.color_temperature_kelvin_to_mired(colortemp)
             self._temperature = temperature
 
         # pylint: disable=broad-except
