@@ -47,8 +47,10 @@ Please report as issue your builb type with a feature list:
 ## Next improvement:
 - testing with other hardware -- **Contribution required !!**
 - Config Flow Support
-- Pull to the HA master
-  
+
+## Pull request in HA core
+https://github.com/home-assistant/core/pull/35132
+
 ## Install for testing 
 
 1. Loggon to your HA or HASS with SSH
