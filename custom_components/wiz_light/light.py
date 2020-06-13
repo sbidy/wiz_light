@@ -182,7 +182,6 @@ class WizBulb(LightEntity):
             return [self._scenes[key] for key in [8, 9, 13, 28, 30, 29, 31]]
         if self._bulbtype == "ESP15_SHTW1_01I":
             return [self._scenes[key] for key in [5, 8, 9, 10, 11, 12, 13, 14, 15, 17, 28, 30, 29, 31]]
-        
         return self._scenes
 
     @property
