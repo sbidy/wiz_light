@@ -16,7 +16,7 @@ from homeassistant.components.light import (
     SUPPORT_COLOR,
     SUPPORT_COLOR_TEMP,
     SUPPORT_EFFECT,
-    Light,
+    LightEntity,
 )
 from homeassistant.const import CONF_HOST, CONF_NAME
 import homeassistant.helpers.config_validation as cv
@@ -48,7 +48,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     async_add_entities([WizBulb(bulb, config[CONF_NAME])])
 
 
-class WizBulb(Light):
+class WizBulb(LightEntity):
     """Representation of WiZ Light bulb."""
 
     def __init__(self, light, name):
