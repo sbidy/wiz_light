@@ -150,7 +150,7 @@ class WizBulb(LightEntity):
         if self._bulbtype == "ESP01_SHDW_01" or self._bulbtype == "ESP01_SHDW1_31":
             return SUPPORT_BRIGHTNESS
         # Support dimmer and effects
-        if self._bulbtype == "ESP06_SHDW9_01":
+        if self._bulbtype == "ESP06_SHDW9_01" or self._bulbtype == "ESP06_SHDW1_01":
             return SUPPORT_BRIGHTNESS | SUPPORT_EFFECT
         # Color Temp and dimmer - not tested
         if self._bulbtype == "ESP01_SHTW1C_31":
@@ -180,6 +180,9 @@ class WizBulb(LightEntity):
         # Filament bulb without white color led
         if self._bulbtype == "ESP06_SHDW9_01":
             return [self._scenes[key] for key in [8, 9, 13, 28, 30, 29, 31]]
+        # Filament bulb ST64
+        if self._bulbtype == "ESP06_SHDW1_01":
+            return [self._scenes[key] for key in [8, 9, 13, 28, 29, 31]]
         if self._bulbtype == "ESP15_SHTW1_01I":
             return [
                 self._scenes[key]
