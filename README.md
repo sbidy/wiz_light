@@ -27,7 +27,7 @@ This component does need a dependency on `pywizlight` like @sbidy's component wh
 | Bulb Type | Dimmer | Color Temp | Effects | RGB | Tested? | Example Product |
 |-----------|--------|------------|---------|-----|-----|-----|
 | ESP01_SHDW_01 | X  |   |   |   |  | |
-| ESP01_SHRGB1C_31 | X | X  | X | X |  | |
+| ESP01_SHRGB1C_31 | X | X  | X | X | x | Phillips 555623 recessed |
 | ESP01_SHTW1C_31 | X | X |   |   | X | Phillips 555599 recessed |
 | ESP56_SHTW3_01 | X |  X  | X  |   | X | |
 | ESP01_SHRGB_03 | X | X | X | X | X | |
