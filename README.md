@@ -2,13 +2,13 @@
 # wiz_light
 A Home assistant integration for (Phillips, SLV and more) WiZ Light bulbs
 
-## Change Log
-
 Tested with the following smart lights:
 
 * [Original Phillips Wiz WiFi LEDs](https://www.lighting.philips.co.in/consumer/smart-wifi-led)
 * [SLV Play RGB bulb](https://www.amazon.de/dp/B07PNCDJLW)
 * [WiZ Filament Bulb](https://www.wizconnected.com/en/consumer/products/g95-filament-whites/)
+
+## Change Log
 
 ## Kudos and contributions
 Thank you [@angadsingh](https://github.com/angadsingh) for make such incredible improvements!!
