@@ -1,7 +1,7 @@
 ---
 name: Bulb Test Report
 about: If you have tested a Bulb with this integration.
-title: "[Bulb Test Report]"
+title: "[Bulb Test Report] "
 labels: enhancement
 assignees: sbidy
 
@@ -13,6 +13,7 @@ Provide the following information:
 
 1. Made an UDP request with nc to the bulb:
 `echo '{"method":"getSystemConfig","params":{}}' | nc -u -w 1 <YOU BULB IP> 38899`
+Report the output here:
 
 2. Provide the native features of the bulb:
   - Dimmer (yes/no):
