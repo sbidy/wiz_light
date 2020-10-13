@@ -20,6 +20,11 @@ Provide the following information:
   - Effects (yes/no):
   - RGB (yes/no):
 
+3. Tested?
+    yes/no
+    If you found bug or problems with the bulb please open an new issue and add a reference to this one.
+
+
 
 **Additional Info**
 Add any other useful information about the bulb? Purchase link? Other stuff you want to share?
