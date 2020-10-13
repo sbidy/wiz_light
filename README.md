@@ -2,6 +2,8 @@
 # wiz_light
 A Home assistant integration for (Phillips, SLV and more) WiZ Light bulbs
 
+## Change Log
+
 Tested with the following smart lights:
 
 * [Original Phillips Wiz WiFi LEDs](https://www.lighting.philips.co.in/consumer/smart-wifi-led)
