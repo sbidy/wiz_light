@@ -35,6 +35,7 @@ This component does need a dependency on `pywizlight` like @sbidy's component wh
 | ESP01_SHRGB_03 | X | X | X | X | X | |
 | ESP01_SHDW1_31 | X |  |  |  |  | |
 | ESP15_SHTW1_01I | X | X |  |  | |
+| ESP03_SHRGB1C_01 | X | X | X | X | X | Philips Color &. Tunable-White A19 |
 | ESP03_SHRGB1W_01 | X | X | X | X | X | Philips Color &. Tunable-White A21 |
 | ESP06_SHDW9_01 | X |  |  |  | X | Philips Soft White A19 |
 
