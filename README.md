@@ -12,6 +12,7 @@ Tested with the following smart lights:
 
 ## Kudos and contributions
 Thank you [@angadsingh](https://github.com/angadsingh) for make such incredible improvements!!
+Thanks to @simora for create a HA Swicht <-> Wiz Switch integration
 
 Bug fixes:
  - Fixes https://github.com/sbidy/wiz_light/issues/6: make the whole component truly async using non-blocking UDP
@@ -54,6 +55,7 @@ Please report as issue your builb type with a feature list:
  - On/Off, Toggle
  - Effects
  - Setting a rhythm as a scene
+ - Switch integration (thanks to @simora)
 
 ## Next improvement:
 - Add Bulb Feature Management via YAML files
@@ -61,7 +63,7 @@ Please report as issue your builb type with a feature list:
 - Config Flow Support
 
 ## Pull request in HA core
-https://github.com/home-assistant/core/pull/35132
+https://github.com/home-assistant/core/pull/35132 - not merged :-(
 
 ## Install for testing 
 
@@ -90,4 +92,11 @@ light:
   - platform: wiz_light
     name: <Name of the device#2>
     host: <IP of the bulb#2>
+```
+If you want to use the integration as switch
+```
+switch:
+  - platform: wiz_light
+    name: <Name of the device>
+    host: <IP of the socket>
 ```
