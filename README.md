@@ -12,7 +12,8 @@ Tested with the following smart lights:
 
 ## Kudos and contributions
 Thank you [@angadsingh](https://github.com/angadsingh) for make such incredible improvements!!
-Thanks to @simora for create a HA Swicht <-> Wiz Switch integration
+
+Thanks to [@simora](https://github.com/simora) for create a HA Swicht <-> Wiz Switch integration
 
 Bug fixes:
  - Fixes https://github.com/sbidy/wiz_light/issues/6: make the whole component truly async using non-blocking UDP
