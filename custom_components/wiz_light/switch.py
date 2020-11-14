@@ -6,7 +6,7 @@ import voluptuous as vol
 
 try:
     from homeassistant.components.switch import SwitchEntity
-except:
+except ImportError:
     from homeassistant.components.switch import SwitchDevice as SwitchEntity
 from homeassistant.components.switch import PLATFORM_SCHEMA
 from homeassistant.const import CONF_HOST, CONF_NAME
