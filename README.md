@@ -37,6 +37,10 @@ This component does need a dependency on `pywizlight` like @sbidy's component wh
 | ESP15_SHTW1_01I | X | X |  |  | |
 | ESP03_SHRGB1W_01 | X | X | X | X | X | Philips Color &. Tunable-White A21 |
 | ESP06_SHDW9_01 | X |  |  |  | X | Philips Soft White A19 |
+| ESP03_SHRGBP_31 | X | X | X | X | X | Trio Leuchten WiZ LED |
+| ESP03_SHRGB1C_01 | X | X | X | X | X | WiZ LED EAN 8718699787059 |
+| ESP17_SHTW9_01 | X | X |  |  | X | WiZ Filament Bulb EAN 8718699786793 |
+
 
 Please report as issue your builb type with a feature list:
 
@@ -51,7 +55,8 @@ Please report as issue your builb type with a feature list:
  - Setting a rhythm as a scene
 
 ## Next improvement:
-- testing with other hardware -- **Contribution required !!**
+- Add Bulb Feature Management via YAML files
+- Testing with other hardware -- **Contribution required !!**
 - Config Flow Support
 
 ## Pull request in HA core

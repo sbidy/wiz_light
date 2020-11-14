@@ -103,6 +103,8 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+dockertest/
+
 # Environments
 .env
 .venv
