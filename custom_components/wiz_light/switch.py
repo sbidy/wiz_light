@@ -7,8 +7,7 @@ import voluptuous as vol
 try:
     from homeassistant.components.switch import SwitchEntity
 except:
-    from homeassistant.components.switch import \
-        SwitchDevice as SwitchEntity
+    from homeassistant.components.switch import SwitchDevice as SwitchEntity
 from homeassistant.components.switch import PLATFORM_SCHEMA
 from homeassistant.const import CONF_HOST, CONF_NAME
 import homeassistant.helpers.config_validation as cv
@@ -20,6 +19,7 @@ _LOGGER = logging.getLogger(__name__)
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {vol.Required(CONF_HOST): cv.string, vol.Required(CONF_NAME): cv.string}
 )
+
 
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Set up the WiZ switch platform."""
@@ -81,13 +81,23 @@ class WizPlug(SwitchEntity):
         """Update the state if bulb is available."""
         self._state = self._switch.status
         self._available = True
-        _LOGGER.debug("[wizlight %s] updated state: %s; available: %s", self._switch.ip, self._state, self._available)
+        _LOGGER.debug(
+            "[wizlight %s] updated state: %s; available: %s",
+            self._switch.ip,
+            self._state,
+            self._available,
+        )
 
     async def update_state_unavailable(self):
         """Update the state if bulb is unavailable."""
         self._state = False
         self._available = False
-        _LOGGER.debug("[wizlight %s] updated state: %s; available: %s", self._switch.ip, self._state, self._available)
+        _LOGGER.debug(
+            "[wizlight %s] updated state: %s; available: %s",
+            self._switch.ip,
+            self._state,
+            self._available,
+        )
 
     async def update_state(self):
         """Update the state."""
