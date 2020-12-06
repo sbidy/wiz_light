@@ -4,6 +4,8 @@ A Home assistant integration for (Phillips, SLV and more) WiZ Light bulbs. The W
 
 ## Change Log
 
+Added a better handling of different bulb types. Introduced a YAML file with dynamic matchting.
+
 ## Kudos and contributions
 Thank you [@angadsingh](https://github.com/angadsingh) for make such incredible improvements!!
 
