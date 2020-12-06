@@ -132,3 +132,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 custom_components/wiz_light/test_lib.py
+custom_components/wiz_light/test.py
