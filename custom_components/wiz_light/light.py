@@ -3,6 +3,8 @@ import logging
 
 from pywizlight import SCENES, PilotBuilder, wizlight
 import voluptuous as vol
+import yaml
+import os
 
 # Import the device class from the component
 from homeassistant.components.light import (
@@ -64,6 +66,7 @@ class WizBulb(LightEntity):
         self._effect = None
         self._scenes = []
         self._bulbtype = None
+        self._bulblib = self.read_bulblib()
 
     @property
     def brightness(self):
@@ -152,28 +155,8 @@ class WizBulb(LightEntity):
     @property
     def supported_features(self) -> int:
         """Flag supported features."""
-        # only dimmer - not tested
-        if self._bulbtype == "ESP01_SHDW_01" or self._bulbtype == "ESP01_SHDW1_31":
-            return SUPPORT_BRIGHTNESS
-        # Support dimmer and effects
-        if self._bulbtype == "ESP06_SHDW9_01" or self._bulbtype == "ESP06_SHDW1_01":
-            return SUPPORT_BRIGHTNESS | SUPPORT_EFFECT
-        # Color Temp and dimmer - not tested
-        if self._bulbtype == "ESP01_SHTW1C_31" or self._bulbtype == "ESP17_SHTW9_01":
-            return SUPPORT_BRIGHTNESS | SUPPORT_COLOR_TEMP
-        # Firlament bulbs support only dimmer (tested)
-        if self._bulbtype == "ESP56_SHTW3_01" or self._bulbtype == "ESP15_SHTW1_01I":
-            return SUPPORT_BRIGHTNESS | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
-        # Full feature support (color) - not tested
-        if (
-            self._bulbtype == "ESP01_SHRGB1C_31"
-            or self._bulbtype == "ESP01_SHRGB_03"
-            or self._bulbtype == "ESP03_SHRGBP_31"
-            or self._bulbtype == "ESP03_SHRGB1C_01"
-        ):
-            return (
-                SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
-            )
+        if self._bulbtype:
+            return self.featuremap(self._bulbtype)
         # fall back
         return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
 
@@ -241,7 +224,8 @@ class WizBulb(LightEntity):
         except Exception as ex:
             _LOGGER.error(ex)
             await self.update_state_unavailable()
-        _LOGGER.debug("[wizlight %s] updated state: %s", self._light.ip, self._state)
+        _LOGGER.debug("[wizlight %s] updated state: %s",
+                      self._light.ip, self._state)
 
     def update_brightness(self):
         """Update the brightness."""
@@ -267,7 +251,8 @@ class WizBulb(LightEntity):
         if colortemp is None or colortemp == 0:
             return
         try:
-            temperature = color_utils.color_temperature_kelvin_to_mired(colortemp)
+            temperature = color_utils.color_temperature_kelvin_to_mired(
+                colortemp)
             self._temperature = temperature
 
         # pylint: disable=broad-except
@@ -313,3 +298,59 @@ class WizBulb(LightEntity):
         self._scenes = []
         for number in SCENES:
             self._scenes.append(SCENES[number])
+
+    def read_bulblib(self):
+        """Read the library of bulbs from YAML."""
+        # fetch the location of the lib yaml
+        __location__ = os.path.realpath(
+            os.path.join(os.getcwd(), os.path.dirname(__file__)))
+        # open the yaml to read the bulb configs
+        try:
+            with open(os.path.join(__location__, "bulblibrary.yaml")) as f:
+                return yaml.safe_load(f)
+        except FileNotFoundError:
+            _LOGGER.error("File can't be found! Please check if the bulblirary.yaml file exists." exc_info=True)
+
+    def featuremap(self, bulbname):
+        """Map the features from YAMl."""
+        features = 0
+        try:
+            # Map features for better reading
+            if self._bulblib[bulbname]['features'].get('brightness'):
+                features = features | SUPPORT_BRIGHTNESS
+            if self._bulblib[bulbname]['features'].get('color'):
+                features = features | SUPPORT_COLOR
+            if self._bulblib[bulbname]['features'].get('effect'):
+                features = features | SUPPORT_EFFECT
+            if self._bulblib[bulbname]['features'].get('color_tmp'):
+                features = features | SUPPORT_COLOR_TEMP
+            return features
+        except KeyError:
+            # if key doesn't exist
+            _LOGGER.info(
+                "Bulb is not present in the library. Fallback to full feature.")
+            return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
+
+    def kelvin_max_map(self, bulbname):
+        """Map the maximum kelvin from YAML."""
+        # Map features for better reading
+        try:
+            kelvin = self._bulblib[bulbname]['kelvin_range'].get('max')
+            kelvin = color_utils.color_temperature_kelvin_to_mired(kelvin)
+            return kelvin
+        except KeyError:
+            _LOGGER.info(
+                "Kelvin is not present in the library. Fallback to 6500")
+            return 6500
+
+    def kelvin_min_map(self, bulbname):
+        """Map the minimum kelvin from YAML."""
+        # Map features for better reading
+        try:
+            kelvin = self._bulblib[bulbname]['kelvin_range'].get('min')
+            kelvin = color_utils.color_temperature_kelvin_to_mired(kelvin)
+            return kelvin
+        except KeyError:
+            _LOGGER.info(
+                "Kelvin is not present in the library. Fallback to 6500")
+            return 6500
