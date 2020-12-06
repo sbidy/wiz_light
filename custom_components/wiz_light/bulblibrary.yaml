@@ -1,6 +1,6 @@
 # Bulb Library for importing possible bulb types
 # TEMPLATE:
-#
+# vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 # <Name>:
 #   name: <Name>
 #   features:
@@ -11,6 +11,7 @@
 #   kelvin_range:
 #     min: 2200
 #     max: 6500
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # Only Brightness
 ESP01_SHDW_01:
@@ -105,6 +106,7 @@ ESP15_SHTW1_01I:
     max: 6500
 # -----------------
 # Brightness, Color Temp, Color and Effect / all features
+# Added #50
 ESP01_SHRGB1C_31:
   name: ESP01_SHRGB1C_31
   features:
@@ -115,7 +117,7 @@ ESP01_SHRGB1C_31:
   kelvin_range:
     min: 2200
     max: 6500
-
+# Test device
 ESP01_SHRGB_03:
   name: ESP01_SHRGB_03
   features:
@@ -124,7 +126,7 @@ ESP01_SHRGB_03:
     effect: true
     color_tmp: true
   kelvin_range:
-    min: 2200
+    min: 2700
     max: 6500
 
 ESP03_SHRGBP_31:
@@ -137,7 +139,7 @@ ESP03_SHRGBP_31:
   kelvin_range:
     min: 2000
     max: 6500
-
+# Added #54
 ESP03_SHRGB1C_01:
   name: ESP03_SHRGB1C_01
   features:
@@ -148,7 +150,7 @@ ESP03_SHRGB1C_01:
   kelvin_range:
     min: 2200
     max: 6500
-
+# Added #55
 ESP03_SHRGB1W_01:
   name: ESP03_SHRGB1W_01
   features:

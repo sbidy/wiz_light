@@ -16,8 +16,7 @@ features = 0
 if dataMap['ESP03_SHRGB1W_01']['features'].get('brightness'):
     features = features | SUPPORT_BRIGHTNESS
 
-if dataMap['klaus']['features'].get('color'):
-    features = features | SUPPORT_COLOR
+print(dataMap['ESP03_SHRGB1W_01']['kelvin_range'].get('min'))
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))

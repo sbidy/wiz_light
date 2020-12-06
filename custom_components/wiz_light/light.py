@@ -139,17 +139,17 @@ class WizBulb(LightEntity):
     @property
     def min_mireds(self):
         """Return the coldest color_temp that this light supports."""
-        if self._bulbtype == "ESP17_SHTW9_01":
-            return color_utils.color_temperature_kelvin_to_mired(5000)
-        # default temp
+        if self._bulbtype:
+            return self.kelvin_max_map(self._bulbtype)
+        # fallback
         return color_utils.color_temperature_kelvin_to_mired(6500)
 
     @property
     def max_mireds(self):
         """Return the warmest color_temp that this light supports."""
-        if self._bulbtype == "ESP17_SHTW9_01" or self._bulbtype == "ESP03_SHRGBP_31":
-            return color_utils.color_temperature_kelvin_to_mired(2000)
-        # default temp
+        if self._bulbtype:
+            return self.kelvin_min_map(self._bulbtype)
+        # fallback
         return color_utils.color_temperature_kelvin_to_mired(2500)
 
     @property
@@ -157,7 +157,7 @@ class WizBulb(LightEntity):
         """Flag supported features."""
         if self._bulbtype:
             return self.featuremap(self._bulbtype)
-        # fall back
+        # fallback
         return SUPPORT_BRIGHTNESS | SUPPORT_COLOR | SUPPORT_COLOR_TEMP | SUPPORT_EFFECT
 
     @property
@@ -309,7 +309,7 @@ class WizBulb(LightEntity):
             with open(os.path.join(__location__, "bulblibrary.yaml")) as f:
                 return yaml.safe_load(f)
         except FileNotFoundError:
-            _LOGGER.error("File can't be found! Please check if the bulblirary.yaml file exists." exc_info=True)
+            _LOGGER.error("File can't be found! Please check if the bulblirary.yaml file exists.", exc_info=True)
 
     def featuremap(self, bulbname):
         """Map the features from YAMl."""
@@ -353,4 +353,4 @@ class WizBulb(LightEntity):
         except KeyError:
             _LOGGER.info(
                 "Kelvin is not present in the library. Fallback to 6500")
-            return 6500
+            return 2500
