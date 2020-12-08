@@ -40,6 +40,7 @@ This component does need a dependency on `pywizlight` like @sbidy's component wh
 | ESP03_SHRGB1C_01 | X | X | X | X | X | WiZ LED EAN 8718699787059 |
 | ESP17_SHTW9_01 | X | X |  |  | X | WiZ Filament Bulb EAN 8718699786793 |
 
+More Bulbs can be found in the `bulblibrary.yaml`
 
 Please report as issue your builb type with a feature list:
 
