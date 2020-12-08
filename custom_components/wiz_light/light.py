@@ -113,6 +113,7 @@ class WizBulb(LightEntity):
                 kwargs[ATTR_COLOR_TEMP]
             )
             colortemp = kelvin
+            _LOGGER.debug("[wizlight %s] kelvin changed and send to bulb: %s", self._light.ip, colortemp)
 
         sceneid = None
         if ATTR_EFFECT in kwargs:
@@ -124,7 +125,6 @@ class WizBulb(LightEntity):
             pilot = PilotBuilder(
                 rgb=rgb, brightness=brightness, colortemp=colortemp, scene=sceneid
             )
-
         await self._light.turn_on(pilot)
 
     async def async_turn_off(self, **kwargs):
@@ -251,6 +251,7 @@ class WizBulb(LightEntity):
             return
         try:
             temperature = color_utils.color_temperature_kelvin_to_mired(colortemp)
+            _LOGGER.debug("[wizlight %s] kelvin from the bulb: %s", self._light.ip, temperature)
             self._temperature = temperature
 
         # pylint: disable=broad-except
@@ -355,5 +356,5 @@ class WizBulb(LightEntity):
             kelvin = color_utils.color_temperature_kelvin_to_mired(kelvin)
             return kelvin
         except KeyError:
-            _LOGGER.info("Kelvin is not present in the library. Fallback to 6500")
+            _LOGGER.info("Kelvin is not present in the library. Fallback to 2500")
             return 2500
