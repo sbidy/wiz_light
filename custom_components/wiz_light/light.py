@@ -214,7 +214,6 @@ class WizBulb(LightEntity):
     async def update_state(self):
         """Update the state."""
         try:
-            _LOGGER.debug("[wizlight %s] updating state", self._light.ip)
             await self._light.updateState()
             if self._light.state is None:
                 await self.update_state_unavailable()
@@ -250,8 +249,8 @@ class WizBulb(LightEntity):
         if colortemp is None or colortemp == 0:
             return
         try:
+            _LOGGER.debug("[wizlight %s] kelvin from the bulb: %s", self._light.ip, colortemp)
             temperature = color_utils.color_temperature_kelvin_to_mired(colortemp)
-            _LOGGER.debug("[wizlight %s] kelvin from the bulb: %s", self._light.ip, temperature)
             self._temperature = temperature
 
         # pylint: disable=broad-except
@@ -307,7 +306,10 @@ class WizBulb(LightEntity):
         # open the yaml to read the bulb configs
         try:
             with open(os.path.join(__location__, "bulblibrary.yaml")) as f:
-                return yaml.safe_load(f)
+                lib = yaml.safe_load(f)
+                # get version
+                _LOGGER.debug("Bulb Library YAML loaded in version %s", lib.get('Version'))
+                return lib
         except FileNotFoundError:
             _LOGGER.error(
                 "File can't be found! Please check if the bulblirary.yaml file exists.",

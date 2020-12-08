@@ -12,7 +12,7 @@
 #     min: 2200
 #     max: 6500
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+Version: "0.1"
 # Only Brightness
 ESP01_SHDW_01:
   name: ESP01_SHDW_01
