@@ -161,4 +161,15 @@ ESP03_SHRGB1W_01:
   kelvin_range:
     min: 2200
     max: 6500
+# Added #59
+ESP03_SHRGB3_01ABI:
+  name: ESP03_SHRGB3_01ABI
+  features:
+    brightness: true
+    color: true
+    effect: true
+    color_tmp: true
+  kelvin_range:
+    min: 2500
+    max: 6500
 # -----------------
