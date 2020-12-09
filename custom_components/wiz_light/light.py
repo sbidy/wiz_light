@@ -113,7 +113,11 @@ class WizBulb(LightEntity):
                 kwargs[ATTR_COLOR_TEMP]
             )
             colortemp = kelvin
-            _LOGGER.debug("[wizlight %s] kelvin changed and send to bulb: %s", self._light.ip, colortemp)
+            _LOGGER.debug(
+                "[wizlight %s] kelvin changed and send to bulb: %s",
+                self._light.ip,
+                colortemp,
+            )
 
         sceneid = None
         if ATTR_EFFECT in kwargs:
@@ -249,7 +253,9 @@ class WizBulb(LightEntity):
         if colortemp is None or colortemp == 0:
             return
         try:
-            _LOGGER.debug("[wizlight %s] kelvin from the bulb: %s", self._light.ip, colortemp)
+            _LOGGER.debug(
+                "[wizlight %s] kelvin from the bulb: %s", self._light.ip, colortemp
+            )
             temperature = color_utils.color_temperature_kelvin_to_mired(colortemp)
             self._temperature = temperature
 
@@ -308,7 +314,9 @@ class WizBulb(LightEntity):
             with open(os.path.join(__location__, "bulblibrary.yaml")) as f:
                 lib = yaml.safe_load(f)
                 # get version
-                _LOGGER.debug("Bulb Library YAML loaded in version %s", lib.get('Version'))
+                _LOGGER.debug(
+                    "Bulb Library YAML loaded in version %s", lib.get("Version")
+                )
                 return lib
         except FileNotFoundError:
             _LOGGER.error(
