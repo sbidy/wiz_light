@@ -1,6 +1,6 @@
 ![Lint](https://github.com/sbidy/wiz_light/workflows/Lint/badge.svg) 
 # wiz_light
-A Home assistant integration for (Phillips, SLV and more) WiZ Light bulbs. The Wiz Plug is also supported as "switch" in HA.
+A Home assistant integration for (Phillips, SLV and more) WiZ Light bulbs. The Wiz Plug is also supported **currently in beta** as "switch" in HA.
 
 ## Change Log
 
