@@ -30,7 +30,7 @@ Report the output here:
 
 **OPTIONAL**
 
-**4. Prepare the YAML - replace <Name> with the ESP_XXXXXXXX name from step 1.**
+**4. Prepare the YAML - replace `<Name>` with the ESP_XXXXXXXX name from step 1.**
   ```
     <Name>:
        name: <Name>
