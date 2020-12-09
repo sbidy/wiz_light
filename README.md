@@ -56,7 +56,6 @@ Please report as issue your builb type with a feature list:
  - Switch integration (thanks to @simora)
 
 ## Next improvement:
-- Add Bulb Feature Management via YAML files
 - Testing with other hardware -- **Contribution required !!**
 - Config Flow Support
 
