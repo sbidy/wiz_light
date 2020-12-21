@@ -6,4 +6,3 @@
     "codeowners": ["@sbidy", "@angadsingh"],
     "requirements": ["pywizlight==0.3.6", "PyYAML==5.3.1"]
   }
-s
