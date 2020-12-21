@@ -16,6 +16,8 @@ Thank you [@angadsingh](https://github.com/angadsingh) for make such incredible 
 
 Thanks to [@simora](https://github.com/simora) for create a HA Swicht <-> Wiz Plug integration
 
+Thanks to [@fabaff](https://github.com/fabaff) for the CLI tool and some code rework!
+
 Bug fixes:
  - Fixes https://github.com/sbidy/wiz_light/issues/6: make the whole component truly async using non-blocking UDP
  - Light control now works even when lights are set to a rhythm.
