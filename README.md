@@ -1,6 +1,6 @@
 ![Lint](https://github.com/sbidy/wiz_light/workflows/Lint/badge.svg) 
 # :bulb: wiz_light - V 0.1
-A Home assistant integration for (Phillips, SLV and more) WiZ Light bulbs. The Wiz Plug is also supported **currently in beta** as "switch" in HA.
+A Home assistant integration for (Philips, SLV and more) WiZ Light bulbs. The Wiz Plug is also supported **currently in beta** as "switch" in HA.
 
 ## :muscle: Change Log
 **Testing/Contribution Required:** I released the integration V0.1 --> check [Releases](https://github.com/sbidy/wiz_light/releases/tag/v0.1)
@@ -28,23 +28,22 @@ Features:
  - Consolidates getPilot and setPilot calls using a PilotBuilder and PilotParser. Removes unnecessary UDP calls for each and every attribute (color, temperature, brightness, scene, etc.) and makes a combined getPilot/setPilot call
  - enhanced debug logging for UDP
 
-This component does need a dependency on `pywizlight` like @sbidy's component which will be install automatically by Home Assistant.
+This component has a dependency on `pywizlight` which will be installed automatically by Home Assistant.
 
 ## Bulbs
 | Bulb Type | Dimmer | Color Temp | Effects | RGB | Tested? | Example Product |
 |-----------|--------|------------|---------|-----|-----|-----|
 | ESP01_SHDW_01 | X  |   |   |   |  | |
-| ESP01_SHRGB1C_31 | X | X  | X | X | x | Phillips 555623 recessed |
-| ESP01_SHTW1C_31 | X | X |   |   | X | Phillips 555599 recessed |
+| ESP01_SHRGB1C_31 | X | X  | X | X | x | Philips 555623 recessed <br\> Philips 556167 A19 Frosted Full Colour and Tunable White|
+| ESP01_SHTW1C_31 | X | X |   |   | X | Philips 555599 recessed |
 | ESP56_SHTW3_01 | X |  X  | X  |   | X | |
 | ESP01_SHRGB_03 | X | X | X | X | X | |
 | ESP01_SHDW1_31 | X |  |  |  |  | |
 | ESP15_SHTW1_01I | X | X |  |  | |
-| ESP03_SHRGB1C_01 | X | X | X | X | X | Philips Color &. Tunable-White A19 |
-| ESP03_SHRGB1W_01 | X | X | X | X | X | Philips Color &. Tunable-White A21 |
+| ESP03_SHRGB1C_01 | X | X | X | X | X | Philips Color &. Tunable-White A19 <br\> WiZ A60 E27 EAN 8718699787059 <br> WiZ G95 E27 EAN 8718699786359|
+| ESP03_SHRGB1W_01 | X | X | X | X | X | Philips Color &. Tunable-White A21 <br\> WiZ A67 E27 EAN 8718699786199|
 | ESP06_SHDW9_01 | X |  |  |  | X | Philips Soft White A19 |
 | ESP03_SHRGBP_31 | X | X | X | X | X | Trio Leuchten WiZ LED |
-| ESP03_SHRGB1C_01 | X | X | X | X | X | WiZ LED EAN 8718699787059 |
 | ESP17_SHTW9_01 | X | X |  |  | X | WiZ Filament Bulb EAN 8718699786793 |
 
 More Bulbs can be found in the `bulblibrary.yaml`
