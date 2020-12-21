@@ -1,0 +1,6 @@
+{
+    "name": "Wiz Light Bulb Integration",
+    "domains": ["light"],
+    "homeassistant": "0.114.0",
+    "iot_class": ["Local Push", "Local Polling"]
+  }

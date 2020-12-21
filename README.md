@@ -1,10 +1,15 @@
 ![Lint](https://github.com/sbidy/wiz_light/workflows/Lint/badge.svg) 
-# wiz_light
-A Home assistant integration for (Phillips, SLV and more) WiZ Light bulbs. The Wiz Plug is also supported as "switch" in HA.
+# :bulb: wiz_light
+A Home assistant integration for (Phillips, SLV and more) WiZ Light bulbs. The Wiz Plug is also supported **currently in beta** as "switch" in HA.
 
-## Change Log
+## :muscle: Change Log
 
-## Kudos and contributions
+Added a better handling of different bulb types. Introduced a YAML file with dynamic matchting.
+
+## :warning: Discussions
+If you have questions or other comments please use the **new** [Discussions Board](https://github.com/sbidy/wiz_light/discussions).
+
+## :blue_heart: Kudos and contributions
 Thank you [@angadsingh](https://github.com/angadsingh) for make such incredible improvements!!
 
 Thanks to [@simora](https://github.com/simora) for create a HA Swicht <-> Wiz Plug integration
@@ -38,6 +43,7 @@ This component does need a dependency on `pywizlight` like @sbidy's component wh
 | ESP03_SHRGB1C_01 | X | X | X | X | X | WiZ LED EAN 8718699787059 |
 | ESP17_SHTW9_01 | X | X |  |  | X | WiZ Filament Bulb EAN 8718699786793 |
 
+More Bulbs can be found in the `bulblibrary.yaml`
 
 Please report as issue your builb type with a feature list:
 
@@ -53,7 +59,6 @@ Please report as issue your builb type with a feature list:
  - Switch integration (thanks to @simora)
 
 ## Next improvement:
-- Add Bulb Feature Management via YAML files
 - Testing with other hardware -- **Contribution required !!**
 - Config Flow Support
 
