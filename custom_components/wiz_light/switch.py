@@ -54,6 +54,7 @@ class WizPlug(SwitchEntity):
 
     @property
     def should_poll(self):
+        """Return True if in poll."""
         return True
 
     async def async_turn_on(self, **kwargs):
