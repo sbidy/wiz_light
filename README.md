@@ -3,8 +3,8 @@
 A Home assistant integration for (Phillips, SLV and more) WiZ Light bulbs. The Wiz Plug is also supported **currently in beta** as "switch" in HA.
 
 ## :muscle: Change Log
-**Testing/Contribution Required:** I released a beta of the new integration V0.1 --> check [Releases](https://github.com/sbidy/wiz_light/releases/tag/V0.1b)
-Please give feedback if any thing is missing or broaken. #50 is still open :wink:
+**Testing/Contribution Required:** I released a beta of the new integration V0.1 --> check [Releases](https://github.com/sbidy/wiz_light/releases/tag/v0.1)
+Please give feedback if any thing is missing or broken. #50 is still open :wink:
 
 Added a better handling of different bulb types. Introduced a YAML file with dynamic matchting.
 
