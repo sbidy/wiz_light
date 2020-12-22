@@ -48,9 +48,9 @@ This component has a dependency on `pywizlight` which will be installed automati
 | ESP17_SHTW9_01 | ✔️ | ✔️ |  |  | ✔️ | • WiZ Filament Bulb EAN 8718699786793 |
 | ESP03_SHRGB3_01ABI | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | 
 
-More Bulbs can be found in the `bulblibrary.yaml`
+More bulbs can be found in the `bulblibrary.yaml`
 
-Please report as issue your builb type with a feature list:
+If you have new bulbs to contribute please open a new issue using the *Bulb Test Report* template. You can find the required information by running the following command using `nc` on a linux host.
 
 `echo '{"method":"getSystemConfig","params":{}}' | nc -u -w 1 <YOU BULB IP> 38899`
 

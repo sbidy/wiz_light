@@ -1,6 +1,6 @@
 ---
 name: Bulb Test Report
-about: If you have tested a Bulb with this integration.
+about: Please use this template to report a bulb you have tested with this integration.
 title: "[Bulb Test Report] "
 labels: enhancement
 assignees: sbidy
