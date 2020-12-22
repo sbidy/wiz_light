@@ -34,18 +34,18 @@ This component has a dependency on `pywizlight` which will be installed automati
 | Bulb Type | Dimmer | Color Temp | Effects | RGB | Tested? | Example Product |
 |-----------|--------|------------|---------|-----|-----|-----|
 | ESP01_SHDW_01 | ✔️ |   |   |   |  | |
-| ESP01_SHRGB1C_31 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | Philips 555623 recessed <br /> Philips 556167 A19 Frosted Full Colour and Tunable White|
-| ESP01_SHTW1C_31 | ✔️ | ✔️ |   |   | ✔️ | Philips 555599 recessed |
+| ESP01_SHRGB1C_31 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | •Philips 555623 recessed <br /> •Philips 556167 A19 Frosted Full Colour and Tunable White|
+| ESP01_SHTW1C_31 | ✔️ | ✔️ |   |   | ✔️ | • Philips 555599 recessed |
 | ESP56_SHTW3_01 | ✔️ |  ✔️  | ✔️  |   | ✔️ | |
 | ESP01_SHRGB_03 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | |
 | ESP01_SHDW1_31 | ✔️ |  |  |  |  |  |
 | ESP06_SHDW1_01 | ✔️ |  |  |  |  |  |
 | ESP15_SHTW1_01I | ✔️ | ✔️ |  |  |  |
-| ESP03_SHRGB1C_01 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | Philips Color &. Tunable-White A19 <br /> WiZ A60 E27 EAN 8718699787059 <br /> WiZ G95 E27 EAN 8718699786359|
-| ESP03_SHRGB1W_01 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | Philips Color &. Tunable-White A21 <br /> WiZ A67 E27 EAN 8718699786199|
-| ESP06_SHDW9_01 | ✔️ |  |  |  | ✔️ | Philips Soft White A19 |
-| ESP03_SHRGBP_31 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | Trio Leuchten WiZ LED |
-| ESP17_SHTW9_01 | ✔️ | ✔️ |  |  | ✔️ | WiZ Filament Bulb EAN 8718699786793 |
+| ESP03_SHRGB1C_01 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | • Philips Color &. Tunable-White A19 <br />• WiZ A60 E27 EAN 8718699787059 <br />• WiZ G95 E27 EAN 8718699786359|
+| ESP03_SHRGB1W_01 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | • Philips Color &. Tunable-White A21 <br />• WiZ A67 E27 EAN 8718699786199|
+| ESP06_SHDW9_01 | ✔️ |  |  |  | ✔️ | • Philips Soft White A19 |
+| ESP03_SHRGBP_31 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | • Trio Leuchten WiZ LED |
+| ESP17_SHTW9_01 | ✔️ | ✔️ |  |  | ✔️ | • WiZ Filament Bulb EAN 8718699786793 |
 | ESP03_SHRGB3_01ABI | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | 
 
 More Bulbs can be found in the `bulblibrary.yaml`
