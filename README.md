@@ -1,6 +1,6 @@
 ![Lint](https://github.com/sbidy/wiz_light/workflows/Lint/badge.svg) 
 # :bulb: wiz_light - V 0.1
-A Home Assistant integration for WiZ Light bulbs and fixtures produced by Ph, SLV and others. The Wiz Plug **currently in beta** is supported as "switch" in Home Assistant.
+A Home Assistant integration for WiZ Light bulbs and fixtures produced by Philips, SLV and others. The Wiz Plug **currently in beta** is supported as "switch" in Home Assistant.
 
 ## :muscle: Change Log
 **Testing/Contribution Required:** I released the integration V0.1 --> check [Releases](https://github.com/sbidy/wiz_light/releases/tag/v0.1)
