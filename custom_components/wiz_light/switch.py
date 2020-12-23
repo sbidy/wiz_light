@@ -5,12 +5,13 @@ from pywizlight import PilotBuilder, wizlight
 import voluptuous as vol
 
 try:
-    from homeassistant.components.switch import SwitchEntity
+    from homeassistant.components.switch import (DOMAIN, SwitchEntity)
 except ImportError:
-    from homeassistant.components.switch import SwitchDevice as SwitchEntity
+    from homeassistant.components.switch import (DOMAIN, SwitchDevice as SwitchEntity)
 from homeassistant.components.switch import PLATFORM_SCHEMA
 from homeassistant.const import CONF_HOST, CONF_NAME
 import homeassistant.helpers.config_validation as cv
+from homeassistant.util import slugify                                     
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -25,10 +26,25 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     """Set up the WiZ switch platform."""
     # Assign configuration variables.
     # The configuration check takes care they are present.
+    name = config[CONF_NAME]
     ip_address = config[CONF_HOST]
     switch = wizlight(ip_address)
+    wizplug = WizPlug(switch, name)
 
-    async_add_entities([WizPlug(switch, config[CONF_NAME])])
+    # Add devices
+    async_add_entities([wizplug])
+    
+    # Register services
+    async def async_update(call=None):
+        """Trigger update."""
+        _LOGGER.debug(
+            "[wizlight %s] update requested",
+            ip_address,
+        )
+        await wizplug.async_update()
+        await wizplug.async_update_ha_state();
+    service_name = slugify(f"{name} update")
+    hass.services.async_register(DOMAIN, service_name, async_update)
 
 
 class WizPlug(SwitchEntity):

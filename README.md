@@ -104,3 +104,4 @@ switch:
     name: <Name of the device>
     host: <IP of the socket>
 ```
+To request immediate update from the device call the service `light.<Name of the device>_update` or `switch.<Name of the device>_update`. Useful e.g. when the device has been switched on from mains and external system (like DHCP server) is able to trigger status update faster than normal polling cycle would which then could trigger further automations.

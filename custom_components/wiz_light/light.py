@@ -13,6 +13,7 @@ from homeassistant.components.light import (
     ATTR_EFFECT,
     ATTR_HS_COLOR,
     ATTR_RGB_COLOR,
+    DOMAIN,           
     PLATFORM_SCHEMA,
     SUPPORT_BRIGHTNESS,
     SUPPORT_COLOR,
@@ -22,6 +23,7 @@ from homeassistant.components.light import (
 )
 from homeassistant.const import CONF_HOST, CONF_NAME
 import homeassistant.helpers.config_validation as cv
+from homeassistant.util import slugify                                     
 import homeassistant.util.color as color_utils
 
 _LOGGER = logging.getLogger(__name__)
@@ -43,11 +45,25 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     """Set up the WiZ Light platform."""
     # Assign configuration variables.
     # The configuration check takes care they are present.
+    name = config[CONF_NAME]                        
     ip_address = config[CONF_HOST]
     bulb = wizlight(ip_address)
+    wizbulb = WizBulb(bulb, name)
 
     # Add devices
-    async_add_entities([WizBulb(bulb, config[CONF_NAME])])
+    async_add_entities([wizbulb])
+
+    # Register services
+    async def async_update(call=None):
+        """Trigger update."""
+        _LOGGER.debug(
+            "[wizlight %s] update requested",
+            ip_address,
+        )
+        await wizbulb.async_update()
+        await wizbulb.async_update_ha_state();
+    service_name = slugify(f"{name} update")
+    hass.services.async_register(DOMAIN, service_name, async_update)
 
 
 class WizBulb(LightEntity):
