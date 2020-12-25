@@ -6,8 +6,6 @@ import voluptuous as vol
 import yaml
 import os
 
-
-
 # Import the device class from the component
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
