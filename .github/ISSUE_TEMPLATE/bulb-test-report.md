@@ -2,7 +2,7 @@
 name: Bulb Test Report
 about: Please use this template to report a bulb you have tested with this integration.
 title: "[Bulb Test Report] "
-labels: enhancement
+labels: "Bulb - Implementation Open" 
 assignees: sbidy
 
 ---
