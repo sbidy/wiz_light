@@ -1,5 +1,5 @@
 ---
-name: Bulb Test Report
+name: Bulb Implementation Report
 about: Please use this template to report a bulb you have tested with this integration.
 title: "Bulb Implementation Report"
 labels: "Bulb - Implementation Open" 
