@@ -1,12 +1,12 @@
 ![Lint](https://github.com/sbidy/wiz_light/workflows/Lint/badge.svg) 
 # :bulb: wiz_light - V 0.1
-A Home assistant integration for (Phillips, SLV and more) WiZ Light bulbs. The Wiz Plug is also supported **currently in beta** as "switch" in HA.
+A Home Assistant integration for WiZ Light bulbs and fixtures produced by Philips, SLV and others. The Wiz Plug **currently in beta** is supported as "switch" in Home Assistant.
 
 ## :muscle: Change Log
 **Testing/Contribution Required:** I released the integration V0.1 --> check [Releases](https://github.com/sbidy/wiz_light/releases/tag/v0.1)
-Please give feedback if any thing is missing or broken. #50 is still open :wink:
+Please give feedback if any thing is missing or broken. 
 
-Added a better handling of different bulb types. Introduced a YAML file with dynamic matchting.
+Added a better handling of different bulb types via a YAML file with dynamic matching.
 
 ## :warning: Discussions
 If you have questions or other comments please use the **new** [Discussions Board](https://github.com/sbidy/wiz_light/discussions).
@@ -14,7 +14,7 @@ If you have questions or other comments please use the **new** [Discussions Boar
 ## :blue_heart: Kudos and contributions
 Thank you [@angadsingh](https://github.com/angadsingh) for make such incredible improvements!!
 
-Thanks to [@simora](https://github.com/simora) for create a HA Swicht <-> Wiz Plug integration
+Thanks to [@simora](https://github.com/simora) for create a HA Switch <-> WiZ Plug integration
 
 Thanks to [@fabaff](https://github.com/fabaff) for the CLI tool and some code rework!
 
@@ -26,30 +26,31 @@ Features:
  - Supports switching the light to rhythm mode! (rhythm is defined as a scene for HA)
  - Implements a pattern of sending multiple command UDP datagrams until response is received
  - Consolidates getPilot and setPilot calls using a PilotBuilder and PilotParser. Removes unnecessary UDP calls for each and every attribute (color, temperature, brightness, scene, etc.) and makes a combined getPilot/setPilot call
- - enhanced debug logging for UDP
+ - Enhanced debug logging for UDP
 
-This component does need a dependency on `pywizlight` like @sbidy's component which will be install automatically by Home Assistant.
+This component has a dependency on `pywizlight` which will be installed automatically by Home Assistant.
 
 ## Bulbs
 | Bulb Type | Dimmer | Color Temp | Effects | RGB | Tested? | Example Product |
 |-----------|--------|------------|---------|-----|-----|-----|
-| ESP01_SHDW_01 | X  |   |   |   |  | |
-| ESP01_SHRGB1C_31 | X | X  | X | X | x | Phillips 555623 recessed |
-| ESP01_SHTW1C_31 | X | X |   |   | X | Phillips 555599 recessed |
-| ESP56_SHTW3_01 | X |  X  | X  |   | X | |
-| ESP01_SHRGB_03 | X | X | X | X | X | |
-| ESP01_SHDW1_31 | X |  |  |  |  | |
-| ESP15_SHTW1_01I | X | X |  |  | |
-| ESP03_SHRGB1C_01 | X | X | X | X | X | Philips Color &. Tunable-White A19 |
-| ESP03_SHRGB1W_01 | X | X | X | X | X | Philips Color &. Tunable-White A21 |
-| ESP06_SHDW9_01 | X |  |  |  | X | Philips Soft White A19 |
-| ESP03_SHRGBP_31 | X | X | X | X | X | Trio Leuchten WiZ LED |
-| ESP03_SHRGB1C_01 | X | X | X | X | X | WiZ LED EAN 8718699787059 |
-| ESP17_SHTW9_01 | X | X |  |  | X | WiZ Filament Bulb EAN 8718699786793 |
+| ESP01_SHDW_01 | ✔️ |   |   |   |  | |
+| ESP01_SHRGB1C_31 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | • Philips 555623 recessed <br /> • Philips 556167 A19 Frosted Full Colour and Tunable White|
+| ESP01_SHTW1C_31 | ✔️ | ✔️ |   |   | ✔️ | • Philips 555599 recessed |
+| ESP56_SHTW3_01 | ✔️ |  ✔️  | ✔️  |   | ✔️ | |
+| ESP01_SHRGB_03 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | |
+| ESP01_SHDW1_31 | ✔️ |  |  |  |  |  |
+| ESP06_SHDW1_01 | ✔️ |  |  |  |  |  |
+| ESP15_SHTW1_01I | ✔️ | ✔️ |  |  |  |
+| ESP03_SHRGB1C_01 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | • Philips Color &. Tunable-White A19 <br />• WiZ A60 E27 EAN 8718699787059 <br />• WiZ G95 E27 EAN 8718699786359|
+| ESP03_SHRGB1W_01 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | • Philips Color &. Tunable-White A21 <br />• WiZ A67 E27 EAN 8718699786199|
+| ESP06_SHDW9_01 | ✔️ |  |  |  | ✔️ | • Philips Soft White A19 |
+| ESP03_SHRGBP_31 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | • Trio Leuchten WiZ LED |
+| ESP17_SHTW9_01 | ✔️ | ✔️ |  |  | ✔️ | • WiZ Filament Bulb EAN 8718699786793 |
+| ESP03_SHRGB3_01ABI | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | 
 
-More Bulbs can be found in the `bulblibrary.yaml`
+More bulbs can be found in the `bulblibrary.yaml`
 
-Please report as issue your builb type with a feature list:
+If you have new bulbs to contribute please open a new issue using the *Bulb Test Report* template. You can find the required information by running the following command using `nc` on a linux host.
 
 `echo '{"method":"getSystemConfig","params":{}}' | nc -u -w 1 <YOU BULB IP> 38899`
 
@@ -79,7 +80,7 @@ https://github.com/home-assistant/core/pull/35132 - not merged :-(
 6. Restart your HA/HASS service in the UI with `<your-URL>/config/server_control`
 7. Add the bulbs to your `configuration.yaml` - You can not add the bulbs in the HA UI!! (configFlow is missing)
 
-As an alternativ you can use the HACS platform for installation - see [HACS Website](https://hacs.xyz)
+As an alternative you can use the HACS platform for installation - see [HACS Website](https://hacs.xyz)
 
 Questions? Check out the github project [pywizlight](https://github.com/sbidy/pywizlight)
 
