@@ -1,5 +1,6 @@
-import yaml
 import os
+
+import yaml
 
 with open(r"bulblibrary.yaml") as f:
     dataMap = yaml.safe_load(f)

@@ -1,16 +1,16 @@
 """WiZ Light integration."""
 import logging
 
-from pywizlight import PilotBuilder, wizlight
+import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
+from homeassistant.components.switch import PLATFORM_SCHEMA
+from homeassistant.const import CONF_HOST, CONF_NAME
+from pywizlight import PilotBuilder, wizlight
 
 try:
     from homeassistant.components.switch import SwitchEntity
 except ImportError:
     from homeassistant.components.switch import SwitchDevice as SwitchEntity
-from homeassistant.components.switch import PLATFORM_SCHEMA
-from homeassistant.const import CONF_HOST, CONF_NAME
-import homeassistant.helpers.config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)
 

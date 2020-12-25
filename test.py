@@ -1,9 +1,11 @@
+# pylint: skip-file
 import asyncio
-import asyncio_dgram
-import time
-from pywizlight import wizlight, PilotBuilder
 import logging
 import sys
+import time
+
+import asyncio_dgram
+from pywizlight import PilotBuilder, wizlight
 
 # python3 -m wiz_light.test
 
