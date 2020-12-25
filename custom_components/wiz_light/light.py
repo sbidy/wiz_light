@@ -6,11 +6,21 @@ import homeassistant.helpers.config_validation as cv
 import homeassistant.util.color as color_utils
 import voluptuous as vol
 import yaml
+
 # Import the device class from the component
 from homeassistant.components.light import (
-    ATTR_BRIGHTNESS, ATTR_COLOR_TEMP, ATTR_EFFECT, ATTR_HS_COLOR,
-    ATTR_RGB_COLOR, PLATFORM_SCHEMA, SUPPORT_BRIGHTNESS, SUPPORT_COLOR,
-    SUPPORT_COLOR_TEMP, SUPPORT_EFFECT, LightEntity)
+    ATTR_BRIGHTNESS,
+    ATTR_COLOR_TEMP,
+    ATTR_EFFECT,
+    ATTR_HS_COLOR,
+    ATTR_RGB_COLOR,
+    PLATFORM_SCHEMA,
+    SUPPORT_BRIGHTNESS,
+    SUPPORT_COLOR,
+    SUPPORT_COLOR_TEMP,
+    SUPPORT_EFFECT,
+    LightEntity,
+)
 from homeassistant.const import CONF_HOST, CONF_NAME
 from pywizlight import SCENES, PilotBuilder, wizlight
 
