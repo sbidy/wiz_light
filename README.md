@@ -1,10 +1,12 @@
 ![Lint](https://github.com/sbidy/wiz_light/workflows/Lint/badge.svg) 
-# :bulb: wiz_light - V 0.1
+# :bulb: wiz_light - V 0.2
 A Home Assistant integration for WiZ Light bulbs and fixtures produced by Philips, SLV and others. The Wiz Plug **currently in beta** is supported as "switch" in Home Assistant.
 
 ## :muscle: Change Log
-**Testing/Contribution Required:** I released the integration V0.1 --> check [Releases](https://github.com/sbidy/wiz_light/releases/tag/v0.1)
-Please give feedback if any thing is missing or broken. 
+**Testing/Contribution Required:** I released the integration V0.2 --> check [Releases](https://github.com/sbidy/wiz_light/releases/tag/v0.2)
+Please give feedback if any thing is missing or broken.
+
+Issue [#62](https://github.com/sbidy/wiz_light/issues/62) should now be fixed. The update to `pywizlight` version 0.3.8 is important!
 
 Added a better handling of different bulb types via a YAML file with dynamic matching.
 
