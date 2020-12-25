@@ -6,7 +6,7 @@ import voluptuous as vol
 import yaml
 import os
 
-VERSION = "0.2"
+
 
 # Import the device class from the component
 from homeassistant.components.light import (
@@ -27,6 +27,7 @@ import homeassistant.helpers.config_validation as cv
 import homeassistant.util.color as color_utils
 
 _LOGGER = logging.getLogger(__name__)
+VERSION = "0.2"
 
 # Validation of the user's configuration
 
