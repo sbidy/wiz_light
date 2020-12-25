@@ -53,6 +53,15 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     # Add devices
     async_add_entities([wizbulb])
 
+    # Handle events
+    async def async_handle_event(event):
+        ip = event.data.get("ip")
+        if ip == ip_address:
+            _LOGGER.debug("[wizlight %s] got first beat event", ip_address)
+            await wizbulb.async_update()
+            await wizbulb.async_update_ha_state();
+    hass.bus.async_listen("wiz_light_first_beat", async_handle_event)
+
     # Register services
     async def async_update(call=None):
         """Trigger update."""
