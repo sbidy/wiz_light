@@ -72,7 +72,7 @@ If you have new bulbs to contribute please open a new issue using the *Bulb Test
 - Config Flow Support
 
 ## Pull request in HA core
-https://github.com/home-assistant/core/pull/44522
+https://github.com/home-assistant/core/pull/44779
 
 ## Install for testing 
 
