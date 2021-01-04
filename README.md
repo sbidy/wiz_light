@@ -5,7 +5,7 @@ A Home Assistant integration for WiZ Light bulbs and fixtures produced by Philip
 
 ## :information_source: [Development Log](https://github.com/sbidy/wiz_light/discussions/78)
 Here you can found some news and updates!!
-I try to create a kind of Development Log to trace an made the current overall development status transparent to you!!
+I try to create a kind of Development Log to trace changes/decissions and made the current overall development status transparent to you!!
 
 ## :muscle: Change Log
 **Testing/Contribution Required:** I released the integration V0.2 --> check [Releases](https://github.com/sbidy/wiz_light/releases/tag/v0.2)
