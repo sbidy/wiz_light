@@ -63,10 +63,6 @@ If you have new bulbs to contribute please open a new issue using the *Bulb Test
  - Setting a rhythm as a scene
  - Switch integration (thanks to @simora)
 
-## Next improvement:
-- Testing with other hardware -- **Contribution required !!**
-- Config Flow Support
-
 ## Pull request in HA core
 https://github.com/home-assistant/core/pull/44779
 
