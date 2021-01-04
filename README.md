@@ -25,7 +25,7 @@ Thanks to [@simora](https://github.com/simora) for create a HA Switch <-> WiZ Pl
 
 Thanks to [@fabaff](https://github.com/fabaff) for the CLI tool and some code rework!
 
-Thanks to [@jarpatus](https://github.com/jarpatus) for the fedback and enhancements!
+Thanks to [@jarpatus](https://github.com/jarpatus) for the feedback and enhancements!
 
 ## :flight_departure: Dependencies
 This component has a dependency on `pywizlight` which will be installed automatically by Home Assistant.
