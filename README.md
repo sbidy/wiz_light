@@ -25,19 +25,10 @@ Thanks to [@simora](https://github.com/simora) for create a HA Switch <-> WiZ Pl
 
 Thanks to [@fabaff](https://github.com/fabaff) for the CLI tool and some code rework!
 
-Bug fixes:
- - Fixes https://github.com/sbidy/wiz_light/issues/6: make the whole component truly async using non-blocking UDP
- - Light control now works even when lights are set to a rhythm.
-
-Features:
- - Supports switching the light to rhythm mode! (rhythm is defined as a scene for HA)
- - Implements a pattern of sending multiple command UDP datagrams until response is received
- - Consolidates getPilot and setPilot calls using a PilotBuilder and PilotParser. Removes unnecessary UDP calls for each and every attribute (color, temperature, brightness, scene, etc.) and makes a combined getPilot/setPilot call
- - Enhanced debug logging for UDP
-
+## :flight_departure: Dependencies
 This component has a dependency on `pywizlight` which will be installed automatically by Home Assistant.
 
-## Bulbs
+## :zap: Bulbs
 | Bulb Type | Dimmer | Color Temp | Effects | RGB | Tested? | Example Product |
 |-----------|--------|------------|---------|-----|-----|-----|
 | ESP01_SHDW_01 | ✔️ |   |   |   |  | |
