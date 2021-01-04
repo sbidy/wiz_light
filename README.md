@@ -19,13 +19,15 @@ Added a better handling of different bulb types via a YAML file with dynamic mat
 If you have questions or other comments please use the **new** [Discussions Board](https://github.com/sbidy/wiz_light/discussions).
 
 ## :blue_heart: Kudos and contributions
-Thank you [@angadsingh](https://github.com/angadsingh) for make such incredible improvements!!
+Thank you [@angadsingh](https://github.com/angadsingh) for make such incredible improvements!
 
-Thanks to [@simora](https://github.com/simora) for create a HA Switch <-> WiZ Plug integration
+Thanks to [@simora](https://github.com/simora) for create a HA Switch <-> WiZ Plug integration!
 
 Thanks to [@fabaff](https://github.com/fabaff) for the CLI tool and some code rework!
 
 Thanks to [@jarpatus](https://github.com/jarpatus) for the feedback and enhancements!
+
+Thanks to [@ChrisLizon](https://github.com/ChrisLizon) for the review, feedbacks and improvements!
 
 ## :flight_departure: Dependencies
 This component has a dependency on `pywizlight` which will be installed automatically by Home Assistant.
