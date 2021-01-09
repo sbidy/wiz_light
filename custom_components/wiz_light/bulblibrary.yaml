@@ -35,6 +35,17 @@ ESP01_SHDW1_31:
   kelvin_range:
     min: 2200
     max: 6500
+
+ESP03_SHDW1_01:                                                                                                                                                               
+  name: ESP03_SHDW_01                                                                                                                                                         
+  features:                                                                                                                                                                   
+    brightness: true                                                                                                                                                          
+    color: false                                                                                                                                                              
+    effect: false                                                                                                                                                             
+    color_tmp: false                                                                                                                                                          
+  kelvin_range:                                                                                                                                                               
+    min: 2200                                                                                                                                                                 
+    max: 6500    
 # ----------
 # Brightness and Effects
 ESP06_SHDW9_01:
