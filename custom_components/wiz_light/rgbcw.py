@@ -184,13 +184,6 @@ def rgbcw2hs (rgb, cw):
     debug ("    HUE OUT: {:.5f}, SATURATION: {:.3f}".format (hue, saturation))
     return hue, saturation
 
-# given a canonical value, a width, and a number of divisions, snap the value to the nearest subdivision
-def snapToDiscreteValue (canonicalValue, divisions, scale):
-    spacing = 1 / (divisions - 1)
-    snapIndex = int ((canonicalValue + (spacing / 2)) / spacing)
-    snappedX = snapIndex * spacing
-    return snappedX * scale
-
 # given a hue, saturation tuple in the range (0..360, 0..100), convert that to a rgbcw for the wiz light
 # brightness may or may not be passed in and is passed through to the trapezoid function
 def hs2rgbcw (hs, brightness):
@@ -199,13 +192,12 @@ def hs2rgbcw (hs, brightness):
     while (hueCanonical >= 1): hueCanonical -= 1;
 
     # compute hue in a discretized space and convert to radians, then a vector
-    hueRadians = snapToDiscreteValue (hueCanonical, 3 * 8, math.pi * 2)
+    hueRadians = hueCanonical * math.pi * 2
     hueVec = vecFromAngle(hueRadians)
 
     # convert saturation to a canonical value in a discretized space
     # we take the square root to give the user more visual control
-    saturationCanonical = hs[1] / 100
-    saturation = snapToDiscreteValue (saturationCanonical, 8, 1)
+    saturation = hs[1] / 100
 
     debug ("HS IN: {}, HUE: {:.5f}, SATURATION: {:.3f}, BRIGHTNESS: {}".format (vecFormat(hs), hueRadians, saturation, brightness))
 
