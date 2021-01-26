@@ -133,3 +133,9 @@ dmypy.json
 .pyre/
 custom_components/wiz_light/test_lib.py
 custom_components/wiz_light/test.py
+
+# MacOS writes these all over the place
+.DS_Store
+
+# IntelliJ IDEA writes project files in these directories
+.idea
