@@ -34,6 +34,9 @@ def printBasis (basis, prefix = ""):
         debug ("{} ".format (vecFormat (vector)), end="")
     debug ("")
 
+# the max value we will use for c and w
+cwMax = 128
+
 # this function computes the linear combination of two basis vectors that define a trapezoid
 # hueVec - a normalized vector in the hue color wheel (0..1, 0..1, 0..1)
 # saturation - a single value representing the length of the hue vector (0..1)
@@ -122,10 +125,8 @@ def trapezoid (hueVec, saturation, brightness):
     # on full isn't the brightest configuration
     # warm_white appears to be 2800k, and cold_white appears to be 6200k, somewhat neutral
     # brightness is achieved by turning both of them on
-    return PilotBuilder(rgb = rgb, warm_white = cw, cold_white = cw, brightness = brightness)
-
-# the max value we will use for c and w
-cwMax = 128
+    #return PilotBuilder(rgb = rgb, warm_white = cw, cold_white = cw, brightness = brightness)
+    return PilotBuilder(rgb = rgb, warm_white = cw, brightness = brightness)
 
 # given a rgb tuple in the range (0..255, 0..255, 0-255), convert that to a rgbcw for the wiz
 # light. brightness may or may not be passed in and is passed through to the trapezoid function
