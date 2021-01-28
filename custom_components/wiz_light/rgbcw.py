@@ -115,7 +115,6 @@ def trapezoid (hueVec, saturation, brightness):
     cw = int (max (0, cw * cwMax))
     if (cw == 0): cw = None;
 
-    # scale cw back to 1-255 and return the Pilot Builder that includes the white light
     debug ("    RGB OUT: {}, CW: {}".format (rgb, cw))
 
     # the wiz light appears to have 5 different LEDs, r, g, b, warm_white, and cold_white
@@ -128,7 +127,7 @@ def trapezoid (hueVec, saturation, brightness):
 # the max value we will use for c and w
 cwMax = 128
 
-# given a rgb tuple in the range (0..3255, 0..255, 0-255), convert that to a rgbcw for the wiz
+# given a rgb tuple in the range (0..255, 0..255, 0-255), convert that to a rgbcw for the wiz
 # light. brightness may or may not be passed in and is passed through to the trapezoid function
 def rgb2rgbcw (rgb, brightness):
     debug ("RGB IN: {}, BRIGHTNESS: {}".format (rgb, brightness))
@@ -173,7 +172,7 @@ def rgbcw2hs (rgb, cw):
         saturation = 1 - (cw / 2)
 
     # we have a saturated version of the hue vector now, which we convert to a hue vector and
-    # then extract the angle of the vector in radians. We add P2 pi to the angle if it is less than
+    # then extract the angle of the vector in radians. We add 2 Pi to the angle if it is less than
     # 0 to put the hue angle in the range from 0 to 2 Pi
     hue = math.atan2 (hueVec[1], hueVec[0])
     while (hue < 0): hue += (math.pi * 2)
