@@ -1,8 +1,16 @@
 {
-    "domain": "wiz_light",
-    "name": "WiZ Light Integration",
-    "documentation": "https://github.com/sbidy/wiz_light",
-    "dependencies": [],
-    "codeowners": ["@sbidy", "@angadsingh"],
-    "requirements": ["pywizlight==0.3.8", "PyYAML==5.3.1"]
-  }
+  "domain": "wiz_light",
+  "name": "WiZ Light",
+  "config_flow": true,
+  "documentation": "https://www.home-assistant.io/integrations/wiz_light",
+  "requirements": [
+    "pywizlight==0.4.1"
+  ],
+  "ssdp": [],
+  "zeroconf": [],
+  "homekit": {},
+  "dependencies": [],
+  "codeowners": [
+    "@sbidy"
+  ]
+}
