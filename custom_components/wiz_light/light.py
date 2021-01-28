@@ -138,9 +138,9 @@ class WizBulb(LightEntity):
             brightness = kwargs.get(ATTR_BRIGHTNESS)
 
         if ATTR_RGB_COLOR in kwargs:
-            pilot = rgb2rgbcw (kwargs.get(ATTR_RGB_COLOR), brightness)
+            pilot = rgb2rgbcw(kwargs.get(ATTR_RGB_COLOR), brightness)
         elif ATTR_HS_COLOR in kwargs:
-            pilot = hs2rgbcw (kwargs.get (ATTR_HS_COLOR), brightness)
+            pilot = hs2rgbcw(kwargs.get(ATTR_HS_COLOR), brightness)
         else:
             colortemp = None
             if ATTR_COLOR_TEMP in kwargs:
@@ -327,16 +327,16 @@ class WizBulb(LightEntity):
             return
         try:
             rgb = self._light.state.get_rgb()
-            if (rgb[0] is None):
+            if rgb[0] is None:
                 # this is the case if the temperature was changed - no information was return form the lamp.
                 # do nothing until the RGB color was changed
                 return
 
             cw = self._light.state.get_warm_white()
-            if (cw is None):
+            if cw is None:
                 return
 
-            self._hscolor = rgbcw2hs (rgb, cw)
+            self._hscolor = rgbcw2hs(rgb, cw)
 
         # pylint: disable=broad-except
         except Exception:
