@@ -27,7 +27,7 @@ from homeassistant.components.light import (
 from homeassistant.const import CONF_HOST, CONF_NAME
 
 
-from .rgbcw import rgb2rgbcw, hs2rgbcw, rgbcw2hs
+from .rgbcw.ColorHelper import rgb2rgbcw, hs2rgbcw, rgbcw2hs
 
 import homeassistant.helpers.config_validation as cv
 from homeassistant.util import slugify
@@ -134,13 +134,14 @@ class WizBulb(LightEntity):
     async def async_turn_on(self, **kwargs):
         """Instruct the light to turn on."""
         brightness = None
+
         if ATTR_BRIGHTNESS in kwargs:
             brightness = kwargs.get(ATTR_BRIGHTNESS)
 
         if ATTR_RGB_COLOR in kwargs:
-            pilot = rgb2rgbcw (kwargs.get(ATTR_RGB_COLOR), brightness)
+            pilot = rgb2rgbcw(kwargs.get(ATTR_RGB_COLOR), brightness)
         elif ATTR_HS_COLOR in kwargs:
-            pilot = hs2rgbcw (kwargs.get (ATTR_HS_COLOR), brightness)
+            pilot = hs2rgbcw(kwargs.get(ATTR_HS_COLOR), brightness)
         else:
             colortemp = None
             if ATTR_COLOR_TEMP in kwargs:
@@ -327,16 +328,16 @@ class WizBulb(LightEntity):
             return
         try:
             rgb = self._light.state.get_rgb()
-            if (rgb[0] is None):
+            if rgb[0] is None:
                 # this is the case if the temperature was changed - no information was return form the lamp.
                 # do nothing until the RGB color was changed
                 return
 
             cw = self._light.state.get_warm_white()
-            if (cw is None):
+            if cw is None:
                 return
 
-            self._hscolor = rgbcw2hs (rgb, cw)
+            self._hscolor = rgbcw2hs(rgb, cw)
 
         # pylint: disable=broad-except
         except Exception:
