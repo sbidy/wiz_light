@@ -25,6 +25,10 @@ from homeassistant.components.light import (
     LightEntity,
 )
 from homeassistant.const import CONF_HOST, CONF_NAME
+
+
+from .rgbcw import rgb2rgbcw, hs2rgbcw, rgbcw2hs
+
 import homeassistant.helpers.config_validation as cv
 from homeassistant.util import slugify
 import homeassistant.util.color as color_utils
@@ -129,40 +133,37 @@ class WizBulb(LightEntity):
 
     async def async_turn_on(self, **kwargs):
         """Instruct the light to turn on."""
-        rgb = None
-        if ATTR_RGB_COLOR in kwargs:
-            rgb = kwargs.get(ATTR_RGB_COLOR)
-        if ATTR_HS_COLOR in kwargs:
-            rgb = color_utils.color_hs_to_RGB(
-                kwargs[ATTR_HS_COLOR][0], kwargs[ATTR_HS_COLOR][1]
-            )
-
         brightness = None
         if ATTR_BRIGHTNESS in kwargs:
             brightness = kwargs.get(ATTR_BRIGHTNESS)
 
-        colortemp = None
-        if ATTR_COLOR_TEMP in kwargs:
-            kelvin = color_utils.color_temperature_mired_to_kelvin(
-                kwargs[ATTR_COLOR_TEMP]
-            )
-            colortemp = kelvin
-            _LOGGER.debug(
-                "[wizlight %s] kelvin changed and send to bulb: %s",
-                self._light.ip,
-                colortemp,
-            )
-
-        sceneid = None
-        if ATTR_EFFECT in kwargs:
-            sceneid = self._light.get_id_from_scene_name(kwargs[ATTR_EFFECT])
-
-        if sceneid == 1000:  # rhythm
-            pilot = PilotBuilder()
+        if ATTR_RGB_COLOR in kwargs:
+            pilot = rgb2rgbcw (kwargs.get(ATTR_RGB_COLOR), brightness)
+        elif ATTR_HS_COLOR in kwargs:
+            pilot = hs2rgbcw (kwargs.get (ATTR_HS_COLOR), brightness)
         else:
-            pilot = PilotBuilder(
-                rgb=rgb, brightness=brightness, colortemp=colortemp, scene=sceneid
-            )
+            colortemp = None
+            if ATTR_COLOR_TEMP in kwargs:
+                kelvin = color_utils.color_temperature_mired_to_kelvin(
+                    kwargs[ATTR_COLOR_TEMP]
+                )
+                colortemp = kelvin
+                _LOGGER.debug(
+                    "[wizlight %s] kelvin changed and send to bulb: %s",
+                    self._light.ip,
+                    colortemp,
+                )
+
+            sceneid = None
+            if ATTR_EFFECT in kwargs:
+                sceneid = self._light.get_id_from_scene_name(kwargs[ATTR_EFFECT])
+
+            if sceneid == 1000:  # rhythm
+                pilot = PilotBuilder()
+            else:
+                pilot = PilotBuilder(
+                    brightness=brightness, colortemp=colortemp, scene=sceneid
+                )
         await self._light.turn_on(pilot)
 
     async def async_turn_off(self, **kwargs):
@@ -325,17 +326,18 @@ class WizBulb(LightEntity):
         if self._light.state.get_rgb() is None:
             return
         try:
-            red, green, blue = self._light.state.get_rgb()
-            if red is None:
+            rgb = self._light.state.get_rgb()
+            if (rgb[0] is None):
                 # this is the case if the temperature was changed - no information was return form the lamp.
                 # do nothing until the RGB color was changed
                 return
-            color = color_utils.color_RGB_to_hs(red, green, blue)
-            if color is not None:
-                self._hscolor = color
-            else:
-                _LOGGER.error("Received invalid HS color : %s", color)
-                self._hscolor = None
+
+            cw = self._light.state.get_warm_white()
+            if (cw is None):
+                return
+
+            self._hscolor = rgbcw2hs (rgb, cw)
+
         # pylint: disable=broad-except
         except Exception:
             _LOGGER.error("Cannot evaluate color", exc_info=True)
