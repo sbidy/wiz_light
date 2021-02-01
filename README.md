@@ -51,6 +51,8 @@ Thanks to [@jarpatus](https://github.com/jarpatus) for the feedback and enhancem
 
 Thanks to [@ChrisLizon](https://github.com/ChrisLizon) for the review, feedbacks and improvements!
 
+Thanks to [@brettonw](https://github.com/brettonw) for improveing the RGB-CW to HU tranistion!
+
 ## :flight_departure: Dependencies
 
 This component has a dependency on `pywizlight` which will be installed automatically by Home Assistant.
