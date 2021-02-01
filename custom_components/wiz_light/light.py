@@ -282,6 +282,9 @@ class WizBulb(LightEntity):
                 await self.update_state_unavailable()
             else:
                 await self.update_state_available()
+        except TimeoutError as ex:
+            _LOGGER.debug(ex)
+            await self.update_state_unavailable()
         except WizLightTimeOutError as ex:
             _LOGGER.debug(ex)
             await self.update_state_unavailable()
