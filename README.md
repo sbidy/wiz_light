@@ -19,7 +19,7 @@ This version represents the current pull from HASS core with some additional imp
 - Registration of the bulb to HASS via UDP API. There are features to register the HASS to the bulb to send UDP packages to the HASS if the state of the bulb was changed. This will made the Poll Service obsolete.
 - A User Documentaion based on HASS Docs. (with screen shots etc.) will be added (soon :wink:)
 
-## What was declined or rejected:
+## What is declined or rejected:
 
 - Change of the speed of the transition from on to off and off->on. This is not supported via the UDP API and can only be configured via WiZ App.
 - Custom Effekts will not be implemented in the HASS integration becaus of missing feature in HASS.
