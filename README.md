@@ -5,6 +5,7 @@
 ## :muscle: Change Log
 This version represents the current pull from HASS core with some additional improvements.
 
+- ISSUE: There is an issue with the startup if the bulb are physically offline. Please start the V0.3 with hhe bulbs online. see #98
 - Working ConfigFlow: Now the bulbs can be configured via UI
 - Devices Registration: The Bulb now shows up as "Light" device
 - [BETA] The colors now "correct" regarding the HS to RGB-CW conversation in the WiZ app. Thanks to @brettonw for incredible work!(should be tested with non-RGB and non-Kelvin bulbs!! )
