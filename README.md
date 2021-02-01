@@ -13,13 +13,13 @@ This version represents the current pull from HASS core with some additional imp
 - Bulb Library Moved: The "YAML" file was removed (because of a policy from HASS dev) and moved to the `pywizlight` repo..
 - Tones of other fixes, improvement and removed typos :wink:
 
-## Still missing but "Work in Progress":
+### Still missing but "Work in Progress":
 
 - Automatic detection for the supported kelvin range of the bulb. This should reduce the static overhead.
 - Registration of the bulb to HASS via UDP API. There are features to register the HASS to the bulb to send UDP packages to the HASS if the state of the bulb was changed. This will made the Poll Service obsolete.
 - A User Documentaion based on HASS Docs. (with screen shots etc.) will be added (soon :wink:)
 
-## What is declined or rejected:
+### What is declined or rejected:
 
 - Change of the speed of the transition from on to off and off->on. This is not supported via the UDP API and can only be configured via WiZ App.
 - Custom Effekts will not be implemented in the HASS integration becaus of missing feature in HASS.
@@ -44,6 +44,8 @@ Thanks to [@jarpatus](https://github.com/jarpatus) for the feedback and enhancem
 Thanks to [@ChrisLizon](https://github.com/ChrisLizon) for the review, feedbacks and improvements!
 
 Thanks to [@brettonw](https://github.com/brettonw) for improveing the RGB-CW to HU tranistion!
+
+Thanks to [@vodovozovge](https://github.com/vodovozovge) for the "insider support" for the community!
 
 ## :flight_departure: Dependencies
 
