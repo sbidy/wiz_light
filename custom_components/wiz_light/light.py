@@ -27,7 +27,7 @@ from homeassistant.components.light import (
 from homeassistant.const import CONF_HOST, CONF_NAME
 
 
-from .rgbcw.ColorHelper import rgb2rgbcw, hs2rgbcw, rgbcw2hs
+from .rgbcw import rgb2rgbcw, rgbcw2hs, hs2rgbcw
 
 import homeassistant.helpers.config_validation as cv
 from homeassistant.util import slugify

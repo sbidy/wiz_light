@@ -2,10 +2,11 @@
 
 # :bulb: wiz_light - V 0.3
 
-## This version represents the current pull from HASS core with some additional improvements.
+This version represents the current pull from HASS core with some additional improvements.
 
 - Working ConfigFlow: Now the bulbs can be configured via UI
 - Devices Registration: The Bulb now shows up as "Light" device
+- [BETA] The colors now "correct" regarding the HS to RGB-CW conversation in the WiZ app. Thanks to @brettonw for incredible work!(should be tested with non-RGB and non-Kelvin bulbs!! )
 - Poll Service: Now it is possible to trigger a status update from the bulb via HASS service. This can be helpful for automations (e.g. motion detectors).
 - DNS and IPs Support: The bulbs can now be added with an DNS name or ip.
 - Bulb Library Moved: The "YAML" file was removed (because of a policy from HASS dev) and moved to the `pywizlight` repo..
