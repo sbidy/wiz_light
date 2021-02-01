@@ -2,6 +2,7 @@
 
 # :bulb: wiz_light - V 0.3
 
+## :muscle: Change Log
 This version represents the current pull from HASS core with some additional improvements.
 
 - Working ConfigFlow: Now the bulbs can be configured via UI
@@ -28,15 +29,6 @@ This version represents the current pull from HASS core with some additional imp
 Here you can found some news and updates!!
 I try to create a kind of Development Log to trace changes/decissions and made the current overall development status transparent to you!!
 
-## :muscle: Change Log
-
-**Testing/Contribution Required:** I released the integration V0.2 --> check [Releases](https://github.com/sbidy/wiz_light/releases/tag/v0.2)
-Please give feedback if any thing is missing or broken.
-
-Issue [#62](https://github.com/sbidy/wiz_light/issues/62) should now be fixed. The update to `pywizlight` version 0.3.8 is important!
-
-Added a better handling of different bulb types via a YAML file with dynamic matching.
-
 ## :warning: Discussions
 
 If you have questions or other comments please use the **new** [Discussions Board](https://github.com/sbidy/wiz_light/discussions).
@@ -57,7 +49,8 @@ Thanks to [@brettonw](https://github.com/brettonw) for improveing the RGB-CW to 
 
 This component has a dependency on `pywizlight` which will be installed automatically by Home Assistant.
 
-## :zap: Bulbs
+## :zap: Bulbs - the library was moved to the [pywizlight](https://github.com/sbidy/pywizlight)
+ project!
 
 | Bulb Type          | Dimmer | Color Temp | Effects | RGB | Tested? | Example Product                                                                                                  |
 | ------------------ | ------ | ---------- | ------- | --- | ------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -76,21 +69,6 @@ This component has a dependency on `pywizlight` which will be installed automati
 | ESP17_SHTW9_01     | ✔️     | ✔️         |         |     | ✔️      | • WiZ Filament Bulb EAN 8718699786793                                                                            |
 | ESP03_SHRGB3_01ABI | ✔️     | ✔️         | ✔️      | ✔️  | ✔️      |
 
-More bulbs can be found in the `bulblibrary.yaml`
-
-If you have new bulbs to contribute please open a new issue using the _Bulb Test Report_ template. You can find the required information by running the following command using `nc` on a linux host.
-
-`echo '{"method":"getSystemConfig","params":{}}' | nc -u -w 1 <YOU BULB IP> 38899`
-
-## Working features
-
-- Brightness
-- Color (RGB)
-- White Color Temperature
-- On/Off, Toggle
-- Effects
-- Setting a rhythm as a scene
-- Switch integration (thanks to @simora)
 
 ## Pull request in HA core
 
@@ -106,15 +84,11 @@ https://github.com/home-assistant/core/pull/44779
 6. Restart your HA/HASS service in the UI with `<your-URL>/config/server_control`
 7. Add the bulbs to your `configuration.yaml` - You can not add the bulbs in the HA UI!! (configFlow is missing)
 
-As an alternative you can use the HACS platform for installation - see [HACS Website](https://hacs.xyz)
-
 Questions? Check out the github project [pywizlight](https://github.com/sbidy/pywizlight)
 
-## Testing
-
-See `test.py` for how the underlying API works
-
 ## HA config
+
+## You can now use the HASS UI to add the devices/integration.
 
 To enable the platform integration after installation add
 
