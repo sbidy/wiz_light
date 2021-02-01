@@ -21,9 +21,9 @@ def vecLenSq(a):
     return vecDot(a, a)
 
 
-def vecLen(cls, a) -> float:
+def vecLen(a) -> float:
     """Retrun Square length."""
-    lenSq = cls.vecLenSq(a)
+    lenSq = vecLenSq(a)
     return sqrt(lenSq) if (lenSq > EPSILON) else 0
 
 

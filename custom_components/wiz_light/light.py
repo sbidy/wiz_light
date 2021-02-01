@@ -1,4 +1,4 @@
-"""WiZ Light integration."""
+"""WiZ Light integration. Version 0.3"""
 from datetime import timedelta
 import logging
 

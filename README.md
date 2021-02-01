@@ -7,7 +7,7 @@ This version represents the current pull from HASS core with some additional imp
 - Working ConfigFlow: Now the bulbs can be configured via UI
 - Devices Registration: The Bulb now shows up as "Light" device
 - [BETA] The colors now "correct" regarding the HS to RGB-CW conversation in the WiZ app. Thanks to @brettonw for incredible work!(should be tested with non-RGB and non-Kelvin bulbs!! )
-- Poll Service: Now it is possible to trigger a status update from the bulb via HASS service. This can be helpful for automations (e.g. motion detectors).
+- Poll Service: Now it is possible to trigger a status update from the bulb via HASS service. This can be helpful for automations (e.g. motion detectors). Standard poll interval is 15 sec.
 - DNS and IPs Support: The bulbs can now be added with an DNS name or ip.
 - Bulb Library Moved: The "YAML" file was removed (because of a policy from HASS dev) and moved to the `pywizlight` repo..
 - Tones of other fixes, improvement and removed typos :wink:
@@ -18,10 +18,10 @@ This version represents the current pull from HASS core with some additional imp
 - Registration of the bulb to HASS via UDP API. There are features to register the HASS to the bulb to send UDP packages to the HASS if the state of the bulb was changed. This will made the Poll Service obsolete.
 - A User Documentaion based on HASS Docs. (with screen shots etc.) will be added (soon :wink:)
 
-## What was declined or rejected:
+## What is declined or rejected:
 
 - Change of the speed of the transition from on to off and off->on. This is not supported via the UDP API and can only be configured via WiZ App.
-- Custom Effekts will not be implemented in the HASS integration becaus of missing in
+- Custom Effekts will not be implemented in the HASS integration becaus of missing featureset.
 
 ## :information_source: [Development Log](https://github.com/sbidy/wiz_light/discussions/78)
 
