@@ -1,11 +1,12 @@
 """WiZ Light integration."""
+from math import sqrt, sin, cos
+from operator import mul, sub, add
 
 
 class MathHelper:
     """Helper class with some math.
 
-    <<<<<<< HEAD
-        A bunch of utility functions, just so we don't have to bring in any external dependencies.
+    A bunch of utility functions, just so we don't have to bring in any external dependencies.
     """
 
     # a small value, really close to zero, more than adequate for our 3 orders of magnitude

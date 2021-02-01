@@ -1,15 +1,14 @@
 """WiZ Light integration."""
 import logging
-from math import atan2, cos, pi, sin, sqrt
-from operator import add, epsilon, mul, sub
+from math import atan2, cos, pi
+from operator import epsilon
+
+from pywizlight.bulb import PilotBuilder
 
 from .vec import MathHelper
 
-from pywizlight.bulb import PilotBuilder, PilotParser, wizlight
-
 _LOGGER = logging.getLogger(__name__)
 
-<<<<<<< HEAD
 
 class ColorHelper:
     """Manages the RGBCW color."""
@@ -17,8 +16,8 @@ class ColorHelper:
     angle = (pi * 2) / 3
     basis = (
         MathHelper.vecFromAngle(0),
-        MathHelper.vecFromAngle(self.angle),
-        MathHelper.vecFromAngle(self.angle * 2),
+        MathHelper.vecFromAngle(angle),
+        MathHelper.vecFromAngle(angle * 2),
     )
     # the max value we will use for c and w
     cwMax = 128
@@ -143,11 +142,11 @@ class ColorHelper:
 
         # scale back to the pilot color space
         rgb = MathHelper.vecInt(MathHelper.vecMul(rgb, 255))
-        cw = int(max(0, cw * self.cwMax))
+        cw = int(max(0, cw * cls.cwMax))
         if cw == 0:
             cw = None
 
-        self.debug("    RGB OUT: {}, CW: {}".format(rgb, cw))
+        cls.debug("    RGB OUT: {}, CW: {}".format(rgb, cw))
 
         # the wiz light appears to have 5 different LEDs, r, g, b, warm_white, and cold_white
         # there appears to be a max power supplied across the 5 LEDs, which explains why all-
