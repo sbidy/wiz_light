@@ -22,7 +22,7 @@ This version represents the current pull from HASS core with some additional imp
 ## What was declined or rejected:
 
 - Change of the speed of the transition from on to off and off->on. This is not supported via the UDP API and can only be configured via WiZ App.
-- Custom Effekts will not be implemented in the HASS integration becaus of missing in
+- Custom Effekts will not be implemented in the HASS integration becaus of missing feature in HASS.
 
 ## :information_source: [Development Log](https://github.com/sbidy/wiz_light/discussions/78)
 
