@@ -103,6 +103,8 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+dockertest/
+
 # Environments
 .env
 .venv
@@ -129,3 +131,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+custom_components/wiz_light/test_lib.py
+custom_components/wiz_light/test.py
+
+# MacOS writes these all over the place
+.DS_Store
+
+# IntelliJ IDEA writes project files in these directories
+.idea
