@@ -2,7 +2,7 @@
 
 # :bulb: wiz_light - V 0.3
 
-## :waring: There are issues in the 0.3 - please use only for testing! I'm working on a fix! Stay tunde
+## :warning: There are issues in the 0.3 - please use only for testing! I'm working on a fix! Stay tunde
 
 ## :muscle: Change Log
 This version represents the current pull from HASS core with some additional improvements.
