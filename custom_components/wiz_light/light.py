@@ -47,7 +47,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {vol.Required(CONF_HOST): cv.string, vol.Required(CONF_NAME): cv.string}
 )
 
-# set poll interval to 15 sec because of changes from external to the bulb
+# set poll interval to 30 sec because of changes from external to the bulb
 SCAN_INTERVAL = timedelta(seconds=15)
 
 
@@ -172,7 +172,9 @@ class WizBulb(LightEntity):
                     colortemp,
                     sceneid,
                 )
-        await self._light.turn_on(pilot)
+        await self._light.turn_on(
+            pilot,
+        )
 
     async def async_turn_off(self, **kwargs):
         """Instruct the light to turn off."""
