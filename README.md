@@ -1,13 +1,11 @@
 ![Lint](https://github.com/sbidy/wiz_light/workflows/Lint/badge.svg) ![Pylint](https://github.com/sbidy/wiz_light/workflows/Pylint/badge.svg)
 
-# :bulb: wiz_light - V 0.3
-
-## :warning: There are issues in the 0.3 - please use only for testing! I'm working on a fix!
+# :bulb: wiz_light - V 0.3.1
 
 ## :muscle: Change Log
 This version represents the current pull from HASS core with some additional improvements.
 
-- ISSUE: There is an issue with the startup if the bulb are physically offline. Please start the V0.3 with hhe bulbs online. see #98
+- **ISSUE:** Bulbs with "brightness only" may have problems with the 0.3.1 and 0.3. I'm working on it!!
 - Working ConfigFlow: Now the bulbs can be configured via UI
 - Devices Registration: The Bulb now shows up as "Light" device
 - [BETA] The colors now "correct" regarding the HS to RGB-CW conversation in the WiZ app. Thanks to @brettonw for incredible work!(should be tested with non-RGB and non-Kelvin bulbs!! )
