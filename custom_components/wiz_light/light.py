@@ -165,6 +165,13 @@ class WizBulb(LightEntity):
                 pilot = PilotBuilder(
                     brightness=brightness, colortemp=colortemp, scene=sceneid
                 )
+                _LOGGER.debug(
+                    "[wizlight %s] Pilot will be send with brightness=%s, colortemp=%s, scene=%s",
+                    self._light.ip,
+                    brightness,
+                    colortemp,
+                    sceneid,
+                )
         await self._light.turn_on(pilot)
 
     async def async_turn_off(self, **kwargs):
