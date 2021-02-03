@@ -2,6 +2,8 @@
 
 # :bulb: wiz_light - V 0.3
 
+## :warning: There are issues in the 0.3 - please use only for testing! I'm working on a fix!
+
 ## :muscle: Change Log
 This version represents the current pull from HASS core with some additional improvements.
 
