@@ -140,7 +140,7 @@ class WizBulb(LightEntity):
 
         if ATTR_RGB_COLOR in kwargs:
             pilot = rgb2rgbcw(kwargs.get(ATTR_RGB_COLOR), brightness)
-        elif ATTR_HS_COLOR in kwargs:
+        if ATTR_HS_COLOR in kwargs:
             pilot = hs2rgbcw(kwargs.get(ATTR_HS_COLOR), brightness)
         else:
             colortemp = None
