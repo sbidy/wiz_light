@@ -266,12 +266,12 @@ class WizBulb(LightEntity):
             "model": self._bulbtype.name,
         }
 
-    async def update_state_available(self):
+    def update_state_available(self):
         """Update the state if bulb is available."""
         self._state = self._light.status
         self._available = True
 
-    async def update_state_unavailable(self):
+    def update_state_unavailable(self):
         """Update the state if bulb is unavailable."""
         self._state = False
         self._available = False
@@ -284,15 +284,15 @@ class WizBulb(LightEntity):
                 _LOGGER.debug(
                     "[wizlight %s] state unavailable: %s", self._light.ip, self._state
                 )
-                await self.update_state_unavailable()
+                self.update_state_unavailable()
             else:
-                await self.update_state_available()
+                self.update_state_available()
         except TimeoutError as ex:
             _LOGGER.debug(ex)
-            await self.update_state_unavailable()
+            self.update_state_unavailable()
         except WizLightTimeOutError as ex:
             _LOGGER.debug(ex)
-            await self.update_state_unavailable()
+            self.update_state_unavailable()
         _LOGGER.debug("[wizlight %s] updated state: %s", self._light.ip, self._state)
 
     def update_brightness(self):
