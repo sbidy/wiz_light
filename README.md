@@ -19,8 +19,6 @@ There are changes in the bulb detection function. I can't test all possible bulb
 - Tones of other fixes, improvement and removed typos :wink:
 
 ### Still missing but "Work in Progress":
-
-- Automatic detection for the supported kelvin range of the bulb. This should reduce the static overhead.
 - Registration of the bulb to HASS via UDP API. There are features to register the HASS to the bulb to send UDP packages to the HASS if the state of the bulb was changed. This will made the Poll Service obsolete.
 - A User Documentaion based on HASS Docs. (with screen shots etc.) will be added (soon :wink:)
 
