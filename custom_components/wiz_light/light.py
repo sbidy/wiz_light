@@ -1,7 +1,6 @@
 """WiZ Light integration."""
 from datetime import timedelta
 import logging
-import asyncio
 
 from pywizlight import SCENES, PilotBuilder, wizlight
 from pywizlight.bulblibrary import BulbType, BulbClass
