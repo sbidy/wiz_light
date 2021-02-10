@@ -5,6 +5,8 @@
 One short note: If you have multible (>5) bulb connected to the HASS, please try to bring all online if you restart the HASS service/container.
 Becuase on older HASS version the startup can be slowed down if multible bulbs are offline.
 
+There are changes in the bulb detection function. I can't test all possible bulb types in real because I have only two of them :wink:.
+
 ## :muscle: Change Log
 - New in 0.4.: The bulb type and featerus will be autodetected.
 - New in 0.4.: Fixing some other small issues. Updat to pywizlight 0.4.5
