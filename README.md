@@ -1,6 +1,9 @@
 ![Lint](https://github.com/sbidy/wiz_light/workflows/Lint/badge.svg) ![Pylint](https://github.com/sbidy/wiz_light/workflows/Pylint/badge.svg)
 
-# :bulb: wiz_light - V 0.4.0
+# :bulb: wiz_light - V 0.4.0 (out for testing)
+
+One short note: If you have multible (>5) bulb connected to the HASS, please try to bring all online if you restart the HASS service/container.
+Becuase on older HASS version the startup can be slowed down if multible bulbs are offline.
 
 ## :muscle: Change Log
 - New in 0.4.: The bulb type and featerus will be autodetected.
