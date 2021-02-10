@@ -1,12 +1,15 @@
 ![Lint](https://github.com/sbidy/wiz_light/workflows/Lint/badge.svg) ![Pylint](https://github.com/sbidy/wiz_light/workflows/Pylint/badge.svg)
 
-# :bulb: wiz_light - V 0.3.1
+# :bulb: wiz_light - V 0.4.0 (out for testing)
+
+One short note: If you have multible (>5) bulb connected to the HASS, please try to bring all online if you restart the HASS service/container.
+Becuase on older HASS version the startup can be slowed down if multible bulbs are offline.
+
+There are changes in the bulb detection function. I can't test all possible bulb types in real because I have only two of them :wink:.
 
 ## :muscle: Change Log
-This version represents the current pull from HASS core with some additional improvements.
-
-- **ISSUE:** Bulbs with "brightness only" may have problems with the 0.3.1 and 0.3. I'm working on it!! See [Issue #99](https://github.com/sbidy/wiz_light/issues/99)
-- **ISSUE:** Some bulbs are currently not correctly detected. I'm working on it!!
+- New in 0.4.: The bulb type and featerus will be autodetected.
+- New in 0.4.: Fixing some other small issues. Updat to pywizlight 0.4.5
 - Working ConfigFlow: Now the bulbs can be configured via UI
 - Devices Registration: The Bulb now shows up as "Light" device
 - [BETA] The colors now "correct" regarding the HS to RGB-CW conversation in the WiZ app. Thanks to @brettonw for incredible work!(should be tested with non-RGB and non-Kelvin bulbs!! )
@@ -16,8 +19,6 @@ This version represents the current pull from HASS core with some additional imp
 - Tones of other fixes, improvement and removed typos :wink:
 
 ### Still missing but "Work in Progress":
-
-- Automatic detection for the supported kelvin range of the bulb. This should reduce the static overhead.
 - Registration of the bulb to HASS via UDP API. There are features to register the HASS to the bulb to send UDP packages to the HASS if the state of the bulb was changed. This will made the Poll Service obsolete.
 - A User Documentaion based on HASS Docs. (with screen shots etc.) will be added (soon :wink:)
 
