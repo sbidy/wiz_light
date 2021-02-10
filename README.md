@@ -1,12 +1,10 @@
 ![Lint](https://github.com/sbidy/wiz_light/workflows/Lint/badge.svg) ![Pylint](https://github.com/sbidy/wiz_light/workflows/Pylint/badge.svg)
 
-# :bulb: wiz_light - V 0.3.1
+# :bulb: wiz_light - V 0.4.0
 
 ## :muscle: Change Log
-This version represents the current pull from HASS core with some additional improvements.
-
-- **ISSUE:** Bulbs with "brightness only" may have problems with the 0.3.1 and 0.3. I'm working on it!! See [Issue #99](https://github.com/sbidy/wiz_light/issues/99)
-- **ISSUE:** Some bulbs are currently not correctly detected. I'm working on it!!
+- New in 0.4.: The bulb type and featerus will be autodetected.
+- New in 0.4.: Fixing some other small issues. Updat to pywizlight 0.4.5
 - Working ConfigFlow: Now the bulbs can be configured via UI
 - Devices Registration: The Bulb now shows up as "Light" device
 - [BETA] The colors now "correct" regarding the HS to RGB-CW conversation in the WiZ app. Thanks to @brettonw for incredible work!(should be tested with non-RGB and non-Kelvin bulbs!! )
