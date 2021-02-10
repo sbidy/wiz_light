@@ -1,8 +1,10 @@
 """WiZ Light integration."""
 from datetime import timedelta
 import logging
+import asyncio
 
 from pywizlight import SCENES, PilotBuilder, wizlight
+from pywizlight.bulblibrary import BulbType
 from pywizlight.exceptions import (
     WizLightConnectionError,
     WizLightNotKnownBulb,
@@ -88,7 +90,7 @@ class WizBulb(LightEntity):
 
     def __init__(self, light: wizlight, name):
         """Initialize an WiZLight."""
-        self._light = light
+        self._light: wizlight = light
         self._state = None
         self._brightness = None
         self._name = name
@@ -98,7 +100,7 @@ class WizBulb(LightEntity):
         self._available = None
         self._effect = None
         self._scenes = []
-        self._bulbtype = None
+        self._bulbtype: BulbType = None
         self._mac = None
 
     @property
@@ -217,22 +219,8 @@ class WizBulb(LightEntity):
     @property
     def effect_list(self):
         """Return the list of supported effects."""
-        if self._bulbtype:
-            # Special filament bulb type
-            if self._bulbtype.name == "ESP56_SHTW3_01":
-                return [self._scenes[key] for key in [8, 9, 14, 15, 17, 28, 29, 31]]
-            # Filament bulb without white color led
-            if self._bulbtype.name == "ESP06_SHDW9_01":
-                return [self._scenes[key] for key in [8, 9, 13, 28, 30, 29, 31]]
-            # Filament bulb ST64
-            if self._bulbtype.name == "ESP06_SHDW1_01":
-                return [self._scenes[key] for key in [8, 9, 13, 28, 29, 31]]
-            if self._bulbtype.name == "ESP15_SHTW1_01I":
-                return [
-                    self._scenes[key]
-                    for key in [5, 8, 9, 10, 11, 12, 13, 14, 15, 17, 28, 30, 29, 31]
-                ]
-            return self._scenes
+        if self._light:
+            return self._light.getSupportedScenes()
         return []
 
     @property
@@ -242,9 +230,14 @@ class WizBulb(LightEntity):
 
     async def async_update(self):
         """Fetch new state data for this light."""
-        await self.update_state()
-        await self.get_bulb_type()
-        await self.get_mac()
+        if self._available is False:
+            # First run the update state with blocking
+            asyncio.run(self.update_state())
+        else:
+            # now run async
+            await self.update_state()
+            await self.get_bulb_type()
+            await self.get_mac()
 
         if self._state is not None and self._state is not False:
             self.update_brightness()

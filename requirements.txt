@@ -1,2 +1,2 @@
-pywizlight
+pywizlight==0.4.5
 PyYAML
