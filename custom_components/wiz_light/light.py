@@ -4,7 +4,7 @@ import logging
 import asyncio
 
 from pywizlight import SCENES, PilotBuilder, wizlight
-from pywizlight.bulblibrary import BulbType
+from pywizlight.bulblibrary import BulbType, BulbClass
 from pywizlight.exceptions import (
     WizLightConnectionError,
     WizLightNotKnownBulb,
@@ -219,8 +219,17 @@ class WizBulb(LightEntity):
     @property
     def effect_list(self):
         """Return the list of supported effects."""
-        if self._light:
-            return self._light.getSupportedScenes()
+        if self._bulbtype:
+            # retrun for TW
+            if self._bulbtype.bulb_type == BulbClass.TW:
+                return [
+                    self._scenes[key]
+                    for key in [6, 9, 10, 11, 12, 13, 14, 15, 16, 18, 29, 30, 31, 32]
+                ]
+            if self._bulbtype.bulb_type == BulbClass.DW:
+                return [self._scenes[key] for key in [9, 10, 13, 14, 29, 30, 31, 32]]
+            # Must be RGB with all
+            return self._scenes
         return []
 
     @property
@@ -230,14 +239,9 @@ class WizBulb(LightEntity):
 
     async def async_update(self):
         """Fetch new state data for this light."""
-        if self._available is False:
-            # First run the update state with blocking
-            asyncio.run(self.update_state())
-        else:
-            # now run async
-            await self.update_state()
-            await self.get_bulb_type()
-            await self.get_mac()
+        await self.update_state()
+        await self.get_bulb_type()
+        await self.get_mac()
 
         if self._state is not None and self._state is not False:
             self.update_brightness()
