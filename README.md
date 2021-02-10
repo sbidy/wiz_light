@@ -90,6 +90,14 @@ https://github.com/home-assistant/core/pull/44779
 
 Questions? Check out the github project [pywizlight](https://github.com/sbidy/pywizlight)
 
+## Enable Debug
+```YAML
+logger:
+    default: warning
+    logs:
+      homeassistant.components.wiz_light: debug
+```
+
 ## HA config
 
 ## You can now use the HASS UI to add the devices/integration.
