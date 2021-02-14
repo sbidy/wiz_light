@@ -61,8 +61,10 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
         bulb = wizlight(ip_address)
         # Add devices
         async_add_entities([WizBulb(bulb, config[CONF_NAME])], update_before_add=True)
+        return True
     except WizLightConnectionError:
         _LOGGER.error("Can't add bulb with ip %s.", ip_address)
+        return False
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
@@ -82,6 +84,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
 
     service_name = slugify(f"{entry.data.get(CONF_NAME)} updateService")
     hass.services.async_register(DOMAIN, service_name, async_update)
+    return True
 
 
 class WizBulb(LightEntity):
@@ -229,11 +232,6 @@ class WizBulb(LightEntity):
                 return [self._scenes[key] for key in [9, 10, 13, 14, 29, 30, 31, 32]]
             # Must be RGB with all
         return self._scenes
-
-    @property
-    def force_update(self):
-        """Force the update to the state machine."""
-        return True
 
     @property
     def available(self):
