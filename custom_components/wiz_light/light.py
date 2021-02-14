@@ -218,7 +218,7 @@ class WizBulb(LightEntity):
     @property
     def effect_list(self):
         """Return the list of supported effects."""
-        if self._bulbtype:
+        if self._bulbtype and len(self._scenes) > 0:
             # retrun for TW
             if self._bulbtype.bulb_type == BulbClass.TW:
                 return [
@@ -228,8 +228,12 @@ class WizBulb(LightEntity):
             if self._bulbtype.bulb_type == BulbClass.DW:
                 return [self._scenes[key] for key in [9, 10, 13, 14, 29, 30, 31, 32]]
             # Must be RGB with all
-            return self._scenes
-        return []
+        return self._scenes
+
+    @property
+    def force_update(self):
+        """Force the update to the state machine."""
+        return True
 
     @property
     def available(self):
@@ -239,8 +243,6 @@ class WizBulb(LightEntity):
     async def async_update(self):
         """Fetch new state data for this light."""
         await self.update_state()
-        await self.get_bulb_type()
-        await self.get_mac()
 
         if self._state is not None and self._state is not False:
             self.update_brightness()
@@ -281,19 +283,24 @@ class WizBulb(LightEntity):
         try:
             await self._light.updateState()
             if self._light.state is None:
-                _LOGGER.debug(
-                    "[wizlight %s] state unavailable: %s", self._light.ip, self._state
-                )
                 self.update_state_unavailable()
             else:
                 self.update_state_available()
+                # Update the rest of the missing info if available
+                await self.get_bulb_type()
+                await self.get_mac()
         except TimeoutError as ex:
             _LOGGER.debug(ex)
             self.update_state_unavailable()
         except WizLightTimeOutError as ex:
             _LOGGER.debug(ex)
             self.update_state_unavailable()
-        _LOGGER.debug("[wizlight %s] updated state: %s", self._light.ip, self._state)
+        _LOGGER.debug(
+            "[wizlight %s] updated state: %s and available: %s",
+            self._light.ip,
+            self._state,
+            self._available,
+        )
 
     def update_brightness(self):
         """Update the brightness."""
