@@ -5,7 +5,7 @@
 One short note: If you have multible (>5) bulb connected to the HASS, please try to bring all online if you restart the HASS service/container.
 Becuase on older HASS version the startup can be slowed down if multible bulbs are offline.
 
-There is an issue with bulb when these are offline on start up and swichted on if HASS is started. The bulbs will stay in "not available". This seems so be a bug :wink:. To fix that you have to switch the entry to "disabled" and than back to "enabled" via the UI (small :gear: in the upper left corner of the UI card).
+There is an issue with bulb when these are offline on start up and swichted on if HASS is started. The bulbs will stay in "not available". This seems so be a bug :wink:. **To fix that you have to switch the entry to "disabled" and than back to "enabled" via the UI (small :gear: in the upper left corner of the UI card).**
 
 There are changes in the bulb detection function. I can't test all possible bulb types in real because I have only two of them :wink:.
 
