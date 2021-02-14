@@ -8,6 +8,7 @@ Becuase on older HASS version the startup can be slowed down if multible bulbs a
 There is an issue with bulb when these are offline on start up and swichted on if HASS is started. The bulbs will stay in "not available". This seems so be a bug :wink:. **To fix that you have to switch the entry to "disabled" and than back to "enabled" via the UI (small :gear: in the upper left corner of the UI card).**
 
 There are changes in the bulb detection function. I can't test all possible bulb types in real because I have only two of them :wink:.
+TW (Tunable White) bulbs seems tho had some issues with the effects. Should be fixed in the current branch.
 
 ## :muscle: Change Log
 - New in 0.4.: The bulb type and featerus will be autodetected.
