@@ -24,6 +24,11 @@ TW (Tunable White) bulbs seems tho had some issues with the effects. Should be f
 ### Still missing but "Work in Progress":
 - Registration of the bulb to HASS via UDP API. There are features to register the HASS to the bulb to send UDP packages to the HASS if the state of the bulb was changed. This will made the Poll Service obsolete.
 - A User Documentaion based on HASS Docs. (with screen shots etc.) will be added (soon :wink:)
+- 
+### Fix "Unavailable" Bug
+
+To fix bulbs which are stuck in a "unavailability" if they are offline at startup:
+![gif](https://github.com/sbidy/wiz_light/blob/master/Fix_na_bug.gif)
 
 ### What is declined or rejected:
 
