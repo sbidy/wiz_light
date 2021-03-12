@@ -5,6 +5,20 @@ __pycache__/
 
 .vscode
 
+# config dir
+config/automations.yaml
+config/groups.yaml
+config/*.db
+config/scenes.yaml
+config/scripts.yaml
+config/secrets.yaml
+config/.HA_VERSION
+config/.*
+config/deps
+config/tts
+config/blueprints
+
+
 # C extensions
 *.so
 
