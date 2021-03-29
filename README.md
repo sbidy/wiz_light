@@ -1,13 +1,16 @@
 ![Lint](https://github.com/sbidy/wiz_light/workflows/Lint/badge.svg) ![Pylint](https://github.com/sbidy/wiz_light/workflows/Pylint/badge.svg)
 
+## Check out my latest post in the "Dev.-Blog"!! ![Click!!!](https://github.com/sbidy/wiz_light/discussions/78#discussioncomment-406814)
+
 # :bulb: wiz_light - V 0.4.0 (out for testing)
 
 One short note: If you have multible (>5) bulb connected to the HASS, please try to bring all online if you restart the HASS service/container.
 Becuase on older HASS version the startup can be slowed down if multible bulbs are offline.
 
-There is an issue with bulb when these are offline on start up and swichted on if HASS is started. The bulbs will stay in "not available". This seems so be a bug in some HASS versions (0.114). To fix that you have to delete the entity via "<yourHASSurl>/config/entities". This will be recreated.
+There is an issue with bulb when these are offline on start up and swichted on if HASS is started. The bulbs will stay in "not available". This seems so be a bug :wink:. **To fix that you have to switch the entry to "disabled" and than back to "enabled" via the UI (small :gear: in the upper left corner of the UI card).**
 
 There are changes in the bulb detection function. I can't test all possible bulb types in real because I have only two of them :wink:.
+TW (Tunable White) bulbs seems tho had some issues with the effects. Should be fixed in the current branch.
 
 ## :muscle: Change Log
 - New in 0.4.: The bulb type and featerus will be autodetected.
@@ -23,6 +26,11 @@ There are changes in the bulb detection function. I can't test all possible bulb
 ### Still missing but "Work in Progress":
 - Registration of the bulb to HASS via UDP API. There are features to register the HASS to the bulb to send UDP packages to the HASS if the state of the bulb was changed. This will made the Poll Service obsolete.
 - A User Documentaion based on HASS Docs. (with screen shots etc.) will be added (soon :wink:)
+- 
+### Fix "Unavailable" Bug
+
+To fix bulbs which are stuck in a "unavailability" if they are offline at startup:
+![gif](https://github.com/sbidy/wiz_light/blob/master/Fix_na_bug.gif)
 
 ### What is declined or rejected:
 
