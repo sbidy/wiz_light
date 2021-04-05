@@ -230,13 +230,13 @@ class WizBulb(LightEntity):
                 e_list = []
                 for key in [6, 9, 10, 11, 12, 13, 14, 15, 16, 18, 29, 30, 31, 32]:
                     # Array counting correction
-                    e_list.append(self._scenes[key-1])
+                    e_list.append(self._scenes[key - 1])
                 return e_list
             if self._bulbtype.bulb_type == BulbClass.DW:
                 e_list = []
                 for key in [9, 10, 13, 14, 29, 30, 31, 32]:
                     # Array counting correction
-                    e_list.append(self._scenes[key-1])
+                    e_list.append(self._scenes[key - 1])
                 return e_list
             # Must be RGB with all
         return self._scenes
