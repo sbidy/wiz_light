@@ -220,16 +220,24 @@ class WizBulb(LightEntity):
 
     @property
     def effect_list(self):
-        """Return the list of supported effects."""
+        """Return the list of supported effects.
+
+        URL: https://docs.pro.wizconnected.com/#light-modes
+        """
         if self._bulbtype and len(self._scenes) > 0:
             # retrun for TW
             if self._bulbtype.bulb_type == BulbClass.TW:
-                return [
-                    self._scenes[key]
-                    for key in [6, 9, 10, 11, 12, 13, 14, 15, 16, 18, 29, 30, 31, 32]
-                ]
+                e_list = []
+                for key in [6, 9, 10, 11, 12, 13, 14, 15, 16, 18, 29, 30, 31, 32]:
+                    # Array counting correction
+                    e_list.append(self._scenes[key-1])
+                return e_list
             if self._bulbtype.bulb_type == BulbClass.DW:
-                return [self._scenes[key] for key in [9, 10, 13, 14, 29, 30, 31, 32]]
+                e_list = []
+                for key in [9, 10, 13, 14, 29, 30, 31, 32]:
+                    # Array counting correction
+                    e_list.append(self._scenes[key-1])
+                return e_list
             # Must be RGB with all
         return self._scenes
 
