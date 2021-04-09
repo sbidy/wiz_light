@@ -2,7 +2,7 @@
 
 ## Check out my latest post in the "Dev.-Blog"!! ![Click!!!](https://github.com/sbidy/wiz_light/discussions/78#discussioncomment-406814)
 
-# :bulb: wiz_light - V 0.4.1 (out for testing)
+# :bulb: wiz_light - V 0.4.2 (out for testing)
 
 One short note: If you have multible (>5) bulb connected to the HASS, please try to bring all online if you restart the HASS service/container.
 Becuase on older HASS version the startup can be slowed down if multible bulbs are offline.
@@ -13,6 +13,7 @@ There are changes in the bulb detection function. I can't test all possible bulb
 TW (Tunable White) bulbs seems tho had some issues with the effects. Should be fixed in the current branch.
 
 ## :muscle: Change Log
+- Workaround in 0.4.2: The bulb FW 1.22.0 breaks the automated kelvin detectioon. A workaround was added. Final solution still open.
 - Small fix in 0.4.1: The Arry for the bulb effects now mapped correctly.
 - New in 0.4.: The bulb type and featerus will be autodetected.
 - New in 0.4.: Fixing some other small issues. Updat to pywizlight 0.4.5
